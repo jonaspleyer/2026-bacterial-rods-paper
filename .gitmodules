@@ -1,0 +1,3 @@
+[submodule "cr_mech_coli"]
+	path = cr_mech_coli
+	url = git@github.com:jonaspleyer/cr_mech_coli/
