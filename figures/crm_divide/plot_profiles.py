@@ -13,6 +13,7 @@ def plot_profile_single(
     p_fixed: float,
     final_cost: tuple[float, float, float],
     name: str,
+    short: str,
     units: str,
     xlow: float | None = None,
     xhigh: float | None = None,
@@ -83,8 +84,8 @@ def plot_profile_single(
     ax.scatter([p_fixed], [cwoup_fin], c=crm.plotting.COLOR5, marker="x")
     ax.scatter([p_fixed], [cwopp1_fin], c=crm.plotting.COLOR5, marker="x")
 
-    ax.set_xlabel(f"{name} [{units}]")
-    ax.set_ylabel("Cost L(θ)")
+    ax.set_xlabel(f"{name} {short} [{units}]")
+    ax.set_ylabel(f"PL({short}) - L(θ)")
     ax.ticklabel_format(axis="y", style="sci", scilimits=(0, 1))
 
     opath1 = Path("figures/crm_divide/profiles-pretty/pdf/")
@@ -105,27 +106,27 @@ if __name__ == "__main__":
 
     n_params = np.arange(samples.shape[1])
     param_infos = [
-        ("Radius", "µm"),
-        ("Strength", "µm^2/min^2"),
-        ("Potential Stiffness", "µm"),
-        ("Growth Rate 0", "1/min"),
-        ("Growth Rate 1", "1/min"),
-        ("Growth Rate 2", "1/min"),
-        ("Growth Rate 3", "1/min"),
-        ("Growth Rate 4", "1/min"),
-        ("Growth Rate 5", "1/min"),
-        ("Division Length 0", "µm"),
-        ("Division Length 1", "µm"),
-        ("Division Length 2", "µm"),
-        ("Division Length 3", "µm"),
-        ("Growth Rate 0-0", "1/min", 0.0, 0.06),
-        ("Growth Rate 0-1", "1/min", 0.0, 0.06),
-        ("Growth Rate 1-0", "1/min", 0.0, 0.06),
-        ("Growth Rate 1-1", "1/min", 0.0, 0.06),
-        ("Growth Rate 2-0", "1/min", 0.0, 0.06),
-        ("Growth Rate 2-1", "1/min", 0.0, 0.06),
-        ("Growth Rate 3-0", "1/min", 0.0, 0.06),
-        ("Growth Rate 3-1", "1/min", 0.0, 0.06),
+        ("Radius", "r", "µm"),
+        ("Strength", "V$_0$", "µm^2/min^2"),
+        ("Potential Stiffness", "ω", "µm"),
+        ("Growth Rate 0", "µ", "1/min"),
+        ("Growth Rate 1", "µ", "1/min"),
+        ("Growth Rate 2", "µ", "1/min"),
+        ("Growth Rate 3", "µ", "1/min"),
+        ("Growth Rate 4", "µ", "1/min"),
+        ("Growth Rate 5", "µ", "1/min"),
+        ("Division Length 0", "l", "µm"),
+        ("Division Length 1", "l", "µm"),
+        ("Division Length 2", "l", "µm"),
+        ("Division Length 3", "l", "µm"),
+        ("Growth Rate 0-0", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 0-1", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 1-0", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 1-1", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 2-0", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 2-1", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 3-0", "µ", "1/min", 0.0, 0.06),
+        ("Growth Rate 3-1", "µ", "1/min", 0.0, 0.06),
     ]
 
     # settings = crm_fit.Settings.from_toml("figures/crm_divide/settings.toml")
