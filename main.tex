@@ -1264,9 +1264,9 @@ e.g. when dealing with division events.
         (E) Schematic of topological difference between model and data due to division.
         (F) Evolution of cost functions applied to successive time steps $t_n$ and $t_{n+1}$,
         exponential regression (ER) and total number of cells.
-        The naive metric (solid line) spikes at division events while the lineage-aware metric
+        The naive metric (solid line) spikes at division events while the Lineage-aware metric
         (dashed line) eliminates discontinuities, following the expected exponential scaling (ER).
-        The exponential regression is fitted to the lineage-aware data.
+        The exponential regression is fitted to the Lineage-aware data.
     }
     \label{fig:mask-difference-metric}
 \end{figure}
@@ -1310,7 +1310,7 @@ Second, we extend our scope by incorporating multiple bacteria with cell-cell in
 We start by considering a short time interval that does not contain division events and enabling us
 to employ the direct Position-space metric (Section~\ref{subsec:direct-metric}).
 Finally, we demonstrate the feasibility of our approach in scenarios involving multiple division
-events by applying the lineage-aware image-space metric (Section~\ref{subsec:image-space-metric})
+events by applying the Lineage-aware image-space metric (Section~\ref{subsec:image-space-metric})
 to a time series containing such events.
 
 % --------------------------------------------------------------------------------------------------
@@ -1476,7 +1476,7 @@ We estimate the parameters of this systems via the direct position-space metric
 
 In the second case-study, we extend the interval to $\SI{85}{\minute}$ whith 13 images including
 division events.
-This requires the use of the lineage-aware image-space metric (see
+This requires the use of the Lineage-aware image-space metric (see
 Section~\ref{subsec:image-space-metric}).
 
 \begin{figure}[H]
@@ -1747,7 +1747,7 @@ However, this approach is still frequently used within the the optimization sche
 in smoothing the calculation of gradients between distinct results.
 
 % We can again calculate likelihood profiles for every optimized parameter.
-Since further mathematical analysis is required to assess how to utilize the Lineage-Aware
+Since further mathematical analysis is required to assess how to utilize the Lineage-aware
 Image-Space metric for maximum-likelihood approaches, we simply display profiles of the cost
 function when fixing a single parameter and reoptimizing the remaining ones.
 While only confidence bands for likelihood profiles as presented in the previous sections could
@@ -1903,7 +1903,7 @@ Furthermore, both methods {\bf [welche Methoden?]} involve additional steps when
 overall growth of the bacteria.
 The direct approach utilizes the positions of the cells which involves their extraction via our
 developed algorithm.
-The Lineage-Aware Image-Space metric utilizes only the masks of the data and thus involves one step
+The Lineage-aware Image-Space metric utilizes only the masks of the data and thus involves one step
 less in the preprocessing steps.
 These distinct choices {\bf [welche distinct choices?]} may influence the obtained values at hand.
 
@@ -1924,7 +1924,7 @@ One clear trend within the direct position-space comparison block is the orderin
 The cells with largest to lowest growth rate are 4,2,3,5,1,0 where the order is only violated in
 the first case, switching between 3 and 5 which is not surprising due to their similarity in
 numerical values.
-However this trend is not picked up when estimating parameters with the Lineage-Aware Image-Space
+However this trend is not picked up when estimating parameters with the Lineage-aware Image-Space
 metric.
 
 \begin{table}[H]
@@ -1946,7 +1946,7 @@ metric.
         Morse                               & 0.0070 & 0.0078 & 0.0118 & 0.0089 & 0.0203 & 0.0094\\
         Morse $\lambda=\SI{1}{\per\minute}$ & 0.0060 & 0.0070 & 0.0113 & 0.0078 & 0.0191 & 0.0093\\
 
-        \multicolumn{7}{l}{\textbf{Lineage-Aware Image-Space Metric}}\\
+        \multicolumn{7}{l}{\textbf{Lineage-aware Image-Space Metric}}\\
         \midrule
         Morse                               & 0.0073 & 0.0060 & 0.0092 & 0.0126 & 0.0091 & 0.0094\\
         Daughter                            & 0.0032 & 0.0179 & 0.0052 & 0.0185 & - & -\\
