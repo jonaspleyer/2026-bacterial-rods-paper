@@ -1549,24 +1549,39 @@ of $11$ parameters: $5$ global parameters that govern mechanics and interactions
 $\lambda$, radius $R$, and parameters $n,m,V_0$ of the mie potential) together with $6$
 cell-specific growth rates $\mu_i$.
 \ac{ecoli} are short and typically straight, allowing us to fix the rigidity $\eta$ to a high value.
-Furthermore, the spring tension $\gamma$ serves as an auxiliary parameter which is also assumed to
-be constant.
-{\bf [siehe meinen Kommentar weiter oben.]}
+The spring constant exerts a force parallel to the connecting segment between two vertices.
+In the presented scenario forces which actively extend the rod are negligible.
+Therefore, the spring tension in combination with a damping effect merely ensures that the length of
+the rod is maintained.
+For this reason, we do not expect to be able to properly estimate the value of this parameter and
+therefore assume a high fixed value such that the rod length is maintained.
 
 We employed a two-stage optimization strategy.
 First, the parameter space was explored using a global Differential Evolution
 algorithm~\cite{Storn1997} which was seeded using Latin-Hypercube sampling~\cite{McKay1979}.
 Finally, local minimization was performed using the L-BFGS-B algorithm~\cite{Liu1989}.
 
-{\bf [du musst auf Fig. 8 verweisen, bevor du Fig. 9 erwähnst]}
+Figure~\ref{fig:parameter-estimation-optimized-results} (A-B) shows differences between the
+numerical results using the optimized parameters and experimental data of the final time step in two
+distinct ways.
+By visually inspecting these subfigures, we can already see that the numerical results match closely
+to the provided data.
+However, in order to systematically analyze these differences and investigate if the obtained
+parameters could be identified, we employ the \textit{profile-likelihood} method.
+
 Figure~\ref{fig:parameter-estimates-single-step} shows the profile-likelihoods for each optimized
-parameter. We compare four distinct models, covering both Morse and Mie-type interactions with a
-fixed damping
-constant $\lambda=\SI{1}{\per\minute}$.
-Figure~\ref{fig:parameter-estimates-single-step} (A) displays the profile-likelihood for the damping
-constant $\lambda$ and exhibits a wide range of permissible parameter values which motivates the
-approach to treat this parameter as a constant thus reducing our overall model.
-{\bf [so kannst du nicht argumentieren. Alle Parameter sind am Ende konstant.]}
+parameter.
+In total, we compare four distinct models, covering both Morse and Mie-type interactions with and
+without a fixed damping constant $\lambda=\SI{1}{\per\minute}$.
+Figure~\ref{fig:parameter-estimates-single-step} (A) displays the \textit{profile-likelihood} for
+the damping constant $\lambda$ of the non-reduced models.
+It exhibits a wide range of permissible parameter values which suggests a possible reduction of our
+model.
+However, we can not simply omit this parameter by effectively setting it to zero as the profile
+shows a steep ascend for $\lambda\rightarrow0$ which means that the observed results would be
+incompatible with this choice.
+Therfore, we assign a fixed value for this parameter.
+
 The parameters which characterize the Morse-type interaction are the potential stiffness strength
 and radius, Figure~\ref{fig:parameter-estimates-single-step} (B, E, F). While the potential
 stiffness (B) and radius (F) can be accurately estimated from the given data, the potential strength
@@ -1600,13 +1615,15 @@ greater uncertainty in the predicted parameter value.
     \end{tikzonimage}%
     \caption{
         Predicted results by the reduced model with Morse-type interaction.
-        (A) Final microscopic image of the time series with the predicted positions of the cells
-        overlayed on top.
-        (B) Differences between extracted and predicted positions.
-        Note that the image-space metric was not used to optimize this system but is
-        chosen here as a tool to aid visualization of the prediction difference.
-        {\bf [das versteht man so nicht. Entweder weglassen oder richtig erklären]}
+        (A) Final microscopic image of the time series with the predicted positions and cell
+        envelopes overlayed on top.
+        The numerically simulated results neatly match the biological reality and possible
+        differences can not be seen directly.
+        Therefore subfigure (B) showcases these differences by utilizing the developed methods of
+        the image-space metric.
+        Note that this is done purely for visualization and not for optimization of the system.
     }
+    \label{fig:parameter-estimation-optimized-results}
 \end{figure}
 
 \begin{figure}[H]
