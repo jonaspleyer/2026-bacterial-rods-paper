@@ -193,6 +193,7 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
                 __add_profiles_to_axis(inf, ax2)
 
                 ax2.set_xlabel(None)
+                ax2.set_ylabel(None)
 
                 ax1.set_xlim(*lims1)
                 ax2.set_xlim(*lims2)
