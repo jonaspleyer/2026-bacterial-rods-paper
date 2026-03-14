@@ -2409,12 +2409,13 @@ Their particular numerical values are not relevant to the methods proposed in th
 For studies targeting to extract precise numerical
 values a closer inspection and clarification would be required.
 The same parameter estimations can also be achieved by using pixel-based units.
-This can be done by rescaling all lengths, which will produce the same results with respect to the
-profile likelihood.
-However, values of the raw cost function will change since this involves a comparison of position
-in the respective space (i.e. pixel or position) and is not normalized by the corresponding
-displacement uncertainty.
-{\bf [hierzu sollten wir nochmals reden]}
+Such changes will leave the profiles unchanged since both the units of the vertices $\vec{x}_i$ and
+of the displacement uncertainty $\sigma$ will be rescaled which will cancel out.
+This can be seen directly when inspecting equations~\ref{eq:parameter-estimation-log-likelihood} and
+\ref{eq:parameter-estimation-least-squares}.
+Furthermore, values of the Lineage-aware Image-Space metric
+(equation~\ref{eq:Lineage-aware-image-space-metric}) will also be left untouched since the image
+resolution does not change.
 
 The obtained constants are listed in Table~\ref{tab:supplement-application-1-constants}.
 As we have explained in the main text, the time series is split into an interval $T_1$ containing no
@@ -2477,13 +2478,14 @@ Figure~\ref{fig:supplement-optimization-progression} shows the progression of th
     \label{fig:supplement-optimization-progression}
 \end{figure}
 
-Figure~\ref{fig:supplement-cost-evolution-time} shows the missing profiles of growth rates of the
+Figure~\ref{fig:supplement-profiles-with-division} shows the missing profiles of growth rates of the
 daughter cells left out in Figure~\ref{fig:likelihood-profiles-comparison-with-division}.
-Some of these parameter values such as (Q,S) and (U) could be compatible with a vanishing growth
-rate. {\bf [es ist unüblich die Zählung nicht bei 1 oder A anfangen zulassen.]}
-However these statements can only be justified with a proper uncertainty analysis involving
-realistic displacement uncertainties.
-{\bf [sind deine Annahmen unrealistisch?]}
+Some of these parameter values such as (A),(C) and (E) could be compatible with a vanishing growth
+rate.
+However these statements can only be completely justified if we can provide a good estimate for the
+displacement uncertainty $\sigma$ in pixel space with respect to the  newly defined Lineage-aware
+Image-Space metric.
+This requires further mathematical attention to its definition.
 Furthermore, results from section~\ref{section:application-2} have shown that growth rates and
 division lengths can be estimated much more accurately when a division event is involved, thus
 providing effectively a lower and upper bound on both values.
@@ -2497,33 +2499,33 @@ interval after division.
 \begin{figure}[H]
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/profiles-pretty/pdf/profile-growth-rate-1-1.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{Q}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{A}};
     \end{tikzonimage}%
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/profiles-pretty/pdf/profile-growth-rate-2-0.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{R}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{B}};
     \end{tikzonimage}%
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/profiles-pretty/pdf/profile-growth-rate-2-1.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{S}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{C}};
     \end{tikzonimage}%
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/profiles-pretty/pdf/profile-growth-rate-3-0.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{T}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{D}};
     \end{tikzonimage}\\
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/profiles-pretty/pdf/profile-growth-rate-3-1.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{U}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{E}};
     \end{tikzonimage}%
     \begin{tikzonimage}[width=0.25\textwidth]
         {figures/crm_divide/growth-rate-distribution.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{V}};
+        \node at (0, 1.1)[anchor=north west, black]{\textbf{F}};
     \end{tikzonimage}%
     \caption{
-        (Q-U) Remaining parameter profiles for the growth rates of the daughter cells.
+        (A-E) Remaining parameter profiles for the growth rates of the daughter cells.
         This extends Figure~\ref{fig:likelihood-profiles-comparison-with-division}.
         The profile show that the parameters can be informed by the provided data.
-        (V) Distribution of estimated growth rates distinguishing between mother (dark blue) and
+        (F) Distribution of estimated growth rates distinguishing between mother (dark blue) and
         daughter (light blue) cells.
     }
     \label{fig:supplement-profiles-with-division}
