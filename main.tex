@@ -1158,21 +1158,25 @@ the other cell and assign a modified penalty value $p_p\geq0$ if this is the cas
 This value should be chosen smaller than the default penalty $p=1$ utilized for non-matching color
 values in order to weaken the assigned penalty due to parental relationship.
 
+When comparing simulation results with data, we denote $I=I(\theta)$ to be the model output which
+implicitly depends on the chosen parameters and therefore informs $L(\theta,I,\tilde{I})$.
 The total cost between two images $I$ and $\tilde{I}$ is the sum of all individual penalties
 \begin{align}
     L_I(\theta|I,\tilde{I}) &= \sum\limits_{i,j} p(I_{ij}, \tilde{I}_{ij})\\
     p(I_{ij},\tilde{I}_{ij}) &= \begin{cases*}
-        p_o & \text{if $I_{ij}$ or $\tilde{I}_{ij}$ is in overlap}\\
+        p_o & \text{if $I_{ij}$ (or $\tilde{I}_{ij}$) is in overlap}\\
         p_p & \text{if $I_{ij}$ is daughter/mother of $\tilde{I}_{ij}$}\\
         1 & \text{if } $I_{ij}\neq \tilde{I}_{ij}$\\
         0 & \text{else}
     \end{cases*}
+    \label{eq:Lineage-aware-image-space-metric}
 \end{align}
 where the sum is over all grid points $i,j$ of the two compared images and a penalty of $p=1$ is
 assigned for non-matching pixel values whose corresponding cells are not related by a parental
 relationship.
-Similar to the preceding section we assume $I=I(\theta)$ to be the model output which therefore
-informs $L(\theta,I,\tilde{I})$.
+In principle it is also feasible to compare one model output with another which would requires us to
+account for overlaps of the secondary image $\tilde{I}$ in the first condition of
+equation~\ref{eq:Lineage-aware-image-space-metric}.
 
 Figure~\ref{fig:mask-difference-metric} (A,B) shows two states of a numerical simulation
 with varying numbers of cells.
