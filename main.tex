@@ -1897,33 +1897,33 @@ been possible by other approaches such as purely statistical models.
 In this section, we compare the estimated parameter values of the various approaches that we have used.
 It is important to keep in mind that the ground truth differs from the first part (without cell
 division) to the second part (with cell division).
-Furthermore, both methods {\bf [welche Methoden?]} involve additional steps when determining the
-overall growth of the bacteria.
+Furthermore, both approaches involve additional steps when determining the overall growth of the
+bacteria.
 The direct approach utilizes the positions of the cells which involves their extraction via our
 developed algorithm.
 The Lineage-aware Image-Space metric utilizes only the masks of the data and thus involves one step
 less in the preprocessing steps.
-These distinct choices {\bf [welche distinct choices?]} may influence the obtained values at hand.
+These differences may influence the optimized parameter values.
 
 Table~\ref{tab:comparison-growth-rates} shows the obtained values for the growth rates via the
 different techniques.
-It also contains the total division lengths $\tilde{l}=(n_\text{vertices}-1)l$ which are obtained by
-summing up all segment lengths.
-In the first section of the table, we see a comparison of calculated growth rates by utilizing
-extracted position or by counting the number of pixels associated with each cell over the course of
-the given time interval.
-In both cases, the same exponential model as presented in equation~\ref{eq:exponential-growth-model}
-is fitted to the data.
-We can already see that this choice greatly influences the obtained results, leading to significant
-differences between the numerical values.
+The first part lists growth rates determined by direct analysis from the data (Data Extraction).
+As discussed before, growth rates can be determined by either fitting the exponential growth model
+(equation \ref{eq:exponential-growth-model}) to the extracted positions (Position Fit) or directly
+to the count of pixels of the associated instance-level segmentation mask of the cell (Pixel Fit).
+We see that the two methods lead to significant differences between the numerical values.
 
-Going further, the estimated growth rates pick up on similar trends.
+The next parts contain the results of section~\ref{sec:application-1-with-division} and
+\ref{sec:application-1-without-division} including growth rates of the resulting daughter cells.
 One clear trend within the direct position-space comparison block is the ordering of growth rates.
 The cells with largest to lowest growth rate are 4,2,3,5,1,0 where the order is only violated in
 the first case, switching between 3 and 5 which is not surprising due to their similarity in
 numerical values.
 However this trend is not picked up when estimating parameters with the Lineage-aware Image-Space
 metric.
+
+Finally, the table lists the total division lengths $\tilde{l}=(n_\text{vertices}-1)l$ which is the
+estimated total length at which the mother cell has divided.
 
 \begin{table}[H]
     \centering
@@ -1950,16 +1950,15 @@ metric.
         Daughter                            & 0.0032 & 0.0179 & 0.0052 & 0.0185 & - & -\\
         Daughter                            & 0.0126 & 0.0048 & 0.0011 & 0.0005 & - & -\\
         \midrule
-        & \multicolumn{4}{c}{Division Lengths $[\tilde{l}]=\unit{\micro\metre}$}\\
-                                            & 2.1080 & 2.2957 & 2.0803 & 1.9870\\
+        & \multicolumn{4}{c}{Estimated Division Lengths $[\tilde{l}]=\unit{\micro\metre}$}\\
+        Morse                               & 2.1080 & 2.2957 & 2.0803 & 1.9870\\
         \bottomrule
     \end{tabular}
-    \caption{{\bf [die Namen Position und Pixel Fit benutzt du hier zum ersten Mal]}
+    \caption{
         Growth Rates and division lengths calculated by the previously discussed approaches
         including growth rates of the daughter cells.
         The division lengths have been multiplied by the number of polygonal sections
         $n_\text{vertices}-1$ to obtain a measure for the overall length of the bacterial rod.
-        {\bf [Was bedeuten die verschiedenen Division Length?]}
     }
     \label{tab:comparison-growth-rates}
 \end{table}
@@ -1973,8 +1972,7 @@ magnitude of the potential, thus also influencing the strength $V_0$.
 However, one clear effect can be seen when comparing the potential stiffness $\omega$ of the direct
 approaches with the Imaging results.
 Due to the fact that the Image-Space metric penalizes overlapping regions of cells, the potential
-stiffness is much larger thus diminishing said effects
-{\bf [es bleibt unklar, welche Effekt du genau meinst.]}.
+stiffness is much larger.
 This could also explain the lower radius value compared to the other results.
 
 \begin{table}[H]
