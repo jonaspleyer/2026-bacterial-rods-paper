@@ -2541,18 +2541,39 @@ increasing time.
 For a Lipschitz-continous system, this deviation can be bound by an exponential envelope of
 differences surrounding the true values, which results in an exponential temporal progression of the
 cost function itself.
-However in our case, Figure~\ref{fig:supplement-cost-evolution-time} (A) clearly shows a linear
-trend, indicating that the model prediction using the estimated parameters yields a good
-approximation to the provided data points.
+
+Figure~\ref{fig:supplement-cost-evolution-time} shows the contributions of the individual time
+points to the total Lineage-aware Image-Space metric.
+As expected, the fully optimized system (orange) does not contain any cases where the parent penalty
+$p_p$ is utilized.
+When increasing the growth rates of all cells by $20\%$ (blue curves), we can see the non-linear
+nature of our system come into play.
+This change leads to a division time much earlier than in the fully optimized case which therefore
+makes use of the parent penalty $p_p$.
+The blue curves show 3 scenarios assigning $p_p=1,0.5,0$ respectively.
+These values show a smooth transition between fully accounting for parental differences $p_p=1$ to
+not accounting for them at all $p_p=0$.
+
+The presented curves exhibit two distinct exponential slopes which are separated by the division
+event.
+This can be observed most accurately in the fully optimized system (orange) where the vertical gray
+line indicates the start of the secondary exponential.
+Such a clear distinction between initial growth phase of the mother cells and secondary growth phase
+of the daughter cells is only possible in this particular scenario where the division events of the
+bacteria are within close temporal proximity to each other.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/crm_divide/time-evolution.pdf}%
     \caption{
-        Contributions to the overall cost function at evaluated time points of the simulation.
-        The fully optimized system does not contain any configurations in which a parent penalty $p$
-        is utilized.
-        {\bf [dieser Plot wirkt komisch mit der Legende]}
+        Contributions to the Lineage-aware Image-Space metric at evaluated time points of the
+        simulation.
+        The fully optimized system (orange) does not contain any configurations in which a parent
+        penalty $p_p$ is utilized.
+        When increasing the growth rates of each cell by $20\%$, we can clearly see the effect of
+        the parent penalty.
+        The case $p_p=1$ will result in full weighting of parental differences, while $p_p=0.5$
+        assigns only partial weighting and $p_p=0$ ignores them.
     }
     \label{fig:supplement-cost-evolution-time}
 \end{figure}
