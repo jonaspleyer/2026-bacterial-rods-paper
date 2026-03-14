@@ -2198,6 +2198,9 @@ opportunities for future quantitative studies in cellular biology.
 The main text stated that the distribution of displacements, split up into parallel and orthogonal
 components along the rod, can be represented by a multivariate normal distribution.
 We first describe in more detail how these distributions are obtained.
+Starting from the notation for the vertices $\nu_{i,j,k,l}$ of shape $(N_c,N_v,d,N_t)$ introduced in
+section~\ref{subsec:direct-metric}, we focus on one particular cell $c_i$ at a given time point
+$t_l$ and denote the resulting quantity with $\nu_{j,k}$, therefore dropping the indices $i,l$.
 Consider the case where we have a set of exactly known vertices $\nu_{j,k}$ and a set of extracted
 vertices $\nu_{j,k}'$.
 The displacements are given by:
@@ -2226,7 +2229,6 @@ at each vertex and apply them to the displacements via
 \end{equation}
 The resulting points are displayed in Figure~\ref{fig:supplement-extraction-algorithm} (A) which is
 identical to the one in the main text.
-{\bf [du musst deine Notation erklären. Was sind $\nu_{i,j}$? Kann es sein, dass die Nenner nicht korrekt sind?]}
 The main text claims that this distribution is well described by a multivariate normal distribution
 with diagonal covariance matrix.
 Figure~\ref{fig:supplement-extraction-algorithm} (C,D) show slices of the full distribution along
