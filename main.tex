@@ -1056,6 +1056,7 @@ is given by
     L(\theta|\nu,\tilde{\nu}) = \sum\limits_{ijkl}\left(\left(\frac{\nu_{ijkl}(\theta)-\tilde{\nu}_{ijkl}}{\sigma_{ijkl}}\right)^2
     + 2 \log(\sigma_{ijkl})
     +\text{const}\right)
+    \label{eq:parameter-estimation-log-likelihood}
 \end{equation}
 which is commonly referred to as a weighted \ac{ls} approach.
 If we additionally assume that the uncertainty $\sigma_{ijkl}=\sigma$ is constant, we can write
@@ -1069,6 +1070,7 @@ Therefore, minimizing the \ac{ls} value
 \begin{equation}
     L_{\text{LS}}(\theta|\nu,\tilde{\nu})
         = \sum\limits_{ijkl}|\nu_{i,j,k,l} - \tilde{\nu}_{ijkl}|^2
+    \label{eq:parameter-estimation-least-squares}
 \end{equation}
 under constant $\sigma$ is equivalent to minimizing the \textit{log-likelihood} $L$ which is again
 equivalent to maximizing the likelihood that the chosen parameters represent our model.
