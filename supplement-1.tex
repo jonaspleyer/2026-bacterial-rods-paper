@@ -1,0 +1,88 @@
+The main text stated that the distribution of displacements, split up into parallel and orthogonal
+components along the rod, can be represented by a multivariate normal distribution.
+We first describe in more detail how these distributions are obtained.
+Starting from the notation for the vertices $\nu_{i,j,k,l}$ of shape $(N_c,N_v,d,N_t)$ introduced in
+section~\ref{subsec:direct-metric}, we focus on one particular cell $c_i$ at a given time point
+$t_l$ and denote the resulting quantity with $\nu_{j,k}$, therefore dropping the indices $i,l$.
+Consider the case where we have a set of exactly known vertices $\nu_{j,k}$ and a set of extracted
+vertices $\nu_{j,k}'$.
+The displacements are given by:
+\begin{equation}
+    \Delta \nu_{j,k} = \nu_{j,k} - \nu_{j,k}'.
+\end{equation}
+In order to calculate their positions with respect to the direction of the rod, we assign a
+direction $d_{j,k}$ at each vertex of the known exact values.
+At the tips of the rod this is done by assigning the direction of the closest edge while vertices in
+the middle are calculated using a central difference approach:
+\begin{align}
+    d_{0,k} &= \frac{(\nu_{1,k}-\nu_{0,k})}{||\nu_1 - \nu_0||}\\
+    d_{N_v,k} &= \frac{(\nu_{N_v,k}-\nu_{N_v-1,k})}{||\nu_{N_v} - \nu_{N_v-1}||}\\
+    d_{j,k} &= \frac{(\nu_{j+1,k}-\nu_{j-1,k})}{||\nu_{j+1} - \nu_{j-1}||}.
+\end{align}
+We can use these directions at each vertex to assign rotation matrices
+\begin{equation}
+    M_{j,l}^k = \begin{pmatrix}
+        d_{j,0} & d_{j,1}\\
+        -d_{j,1} & d_{j,0}
+    \end{pmatrix}
+\end{equation}
+at each vertex and apply them to the displacements via
+\begin{equation}
+    (\Delta\nu_{j,k})_\text{directed} = \sum\limits_l M_{j,l}^k \Delta\nu_{j,l}.
+\end{equation}
+The resulting points are displayed in Figure~\ref{fig:supplement-extraction-algorithm} (A) which is
+identical to the one in the main text.
+The main text claims that this distribution is well described by a multivariate normal distribution
+with diagonal covariance matrix.
+Figure~\ref{fig:supplement-extraction-algorithm} (C,D) show slices of the full distribution along
+the parallel and orthogonal axis.
+Darker colors indicate earlier stages of the simulation while lighter colors indicate later stages.
+Visually, we can already see that the distribution is quite narrow initially but widens with
+increased simulation time.
+To quantify this behavior, we fit a multivariate normal distribution at each time point to the
+distribution of displacements.
+The main text has already discussed results for the variances $\sigma_{00}$ and $\sigma_{11}$.
+Figure~\ref{fig:supplement-extraction-algorithm} (B) shows the trajectory of the covariance
+$\sigma_{01}=\sigma_{10}$ which has been normalized to the value of $\sigma_{00}$.
+Its small relative value justifies the statement in the main text and shows no correlation between
+parallel and orthogonal displacement values.
+
+Another detail is the resolution of the utilized image.
+Situations of high resolution generally present no concerns but images with low resolutions where a
+single bacterium is only made up of a few pixels in its diameter can present problems.
+Firstly, the skeletonization algorithm will not be able to accurately determine the middle of the
+rod due to the discreteness of the pixel-grid.
+Secondly, the same discreteness presents a minimal error threshold which should probably always be
+considered.
+Within our performed benchmarks, we did not run into such situations since we chose large enough
+resolutions.
+In general, we do not anticipate that these scenarios are common for most practical applications.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzonimage}[width=0.5\textwidth]
+        {figures/docs/fitting-methods/displacement-distribution.pdf}
+        \node at (0, 1)[anchor=north west, black]{\textbf{A}};
+    \end{tikzonimage}%
+    \begin{tikzonimage}[width=0.5\textwidth]
+        {figures/docs/fitting-methods/displacement-fit-over-time-covariance.pdf}
+        \node at (0, 1)[anchor=north west, black]{\textbf{B}};
+    \end{tikzonimage}\\
+    \begin{tikzonimage}[width=0.5\textwidth]
+        {figures/docs/fitting-methods/displacement-distr-x.pdf}
+        \node at (0, 1)[anchor=north west, black]{\textbf{C}};
+    \end{tikzonimage}%
+    \begin{tikzonimage}[width=0.5\textwidth]
+        {figures/docs/fitting-methods/displacement-distr-y.pdf}
+        \node at (0, 1)[anchor=north west, black]{\textbf{D}};
+    \end{tikzonimage}
+    \caption{
+        (A) Distribution of displacements between exact and extracted vertices parallel and
+        orthogonal to the rod.
+        (B) Covariance $\sigma_{01}$ normalized by $\sigma_{00}$ over the course of the simulation.
+        (C,D) Distributions of displacements sliced parallel (C) and orthogonal (D) to the rod.
+        Darker colors indicate earlier stages of the simulation while brighter colors indicate later
+        stages.
+    }
+    \label{fig:supplement-extraction-algorithm}
+\end{figure}

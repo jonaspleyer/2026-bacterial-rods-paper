@@ -1,0 +1,92 @@
+The studies performed by Amir et. al~\cite{Amir2014,Amir2014_2} provided movies of microscopic
+images which showcased 3 states in total:
+An initial state, a bent state and the final relaxed state.
+{\bf [kann es sein, dass du die Zeitinformation, die in den Movies enthalten ist, in deinem Parameterfit nicht genutzt hast?]}
+To effectively estimate the positions of the bacterium at these time points, we manually modified
+the provided images by amplifying light shadings of the green cellular envelope.
+This is displayed in Figure~\ref{fig:supplement-amir-progression} (A-C) as the bright green cellular
+shape.
+Our position extraction algorithm provides the discretized vertices of the bacterium (shown in red).
+Figures (D-F) show renders of the corresponding simulation snapshots where dark gray symbolizes the
+area in which the confinement of the tube is employed as described in
+section~\ref{sec:application-1-amir}.
+The system is specified by the estimated parameters and a range of constants which can be obtained
+from the experimental conditions.
+These are listed in Table~\ref{tab:supplement-amir-constants}.
+The number of vertices $N_\text{vertices}$ should be chosen large enough such that the bending of
+the rod can be properly captured.
+Values which are too small will inadvertently lead to undesired interactions with the confinement
+condition imposed by the narrow tube.\\
+To fully model this system, a force exerted by the flowing fluid is taken into account.
+The flow profile was derived from a standard laminar flow along a tube with Neumann boundary
+conditions~\cite{Wolschin2021}.
+This profile was experimentally measured and confirmed~\cite{Amir2014}.
+Furthermore, the publication explicitly stated values for the size of the flow domain north of the
+confined tube $L_{y,\text{domain}}$ which leaves us only with the strength of the flow force as the
+remaining estimated parameter.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/progressions/step4-000010.png}
+        \node at (0.02,17pt)[anchor=north west, white]{\textbf{A}};
+    \end{tikzonimage}%
+    \hspace{0.01\textwidth}%
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/progressions/step4-000017.png}
+        \node at (0.02,17pt)[anchor=north west, white]{\textbf{B}};
+    \end{tikzonimage}%
+    \hspace{0.01\textwidth}%
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/progressions/step4-000034.png}
+        \node at (0.02,17pt)[anchor=north west, white]{\textbf{C}};
+    \end{tikzonimage}\\
+    \vspace{0.01\textwidth}%
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/result-full/0000000000.png}
+        \node at (0.02, 0.98)[anchor=north west]{\textbf{D}};
+    \end{tikzonimage}%
+    \hspace{0.01\textwidth}%
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/result-full/0000000001.png}
+        \node at (0.02, 0.98)[anchor=north west]{\textbf{E}};
+    \end{tikzonimage}%
+    \hspace{0.01\textwidth}%
+    \begin{tikzonimage}[width=0.3\textwidth]
+        {figures/crm_amir/result-full/0000000002.png}
+        \node at (0.02, 0.98)[anchor=north west]{\textbf{F}};
+    \end{tikzonimage}%
+    \caption{
+        (A-C) Images by Amir et. al~\cite{Amir2014_2} which have been manually segmented.
+        The red line within the mask represents the extracted positions.
+        (D-F) Snapshots of the numerical simulation showing the rod in its initial, fully bent and
+        fully relaxed state.
+    }
+    \label{fig:supplement-amir-progression}
+\end{figure}
+
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{l r@{} @{\hspace{0.3em}}l X}
+        \textbf{Constant} & \multicolumn{2}{l}{\textbf{Value}} & \textbf{Description}\\
+        \toprule
+        $t_\text{bend}$ & $7$&$\unit{\second}$ & Interval with active flow\\
+        $t_\text{relax}$ & $17$&$\unit{\second}$ & Relaxation interval after deactivating flow\\
+        $h$ & $10.2$&$\unit{\pixel\per\micro\metre}$ & Conversion factor between pixels and lengths\\
+        $N_\text{vertices}$ & $20$ && Number of vertices use for the discretized rod\\
+        $\Delta x$ & $0.8$&$\unit{\micro\metre}$ & Displacement uncertainty used to calculate the profile-likelihood\\
+        $L_\text{y,domain}$ & $59.22$ & $\unit{\micro\metre}$ & Vertical size of the domain
+        extending further than the shown images.\\
+            & $604$ & $\unit{\pixel}$\\
+        $L_\text{tube}$ & $19.61$ & $\unit{\micro\metre}$ & Size of the tube which confines the bacterium.\\
+            & $200$ & $\unit{\pixel}$\\
+        \bottomrule
+    \end{tabularx}
+    \caption{Constants utilized for the numerical simulation.}
+    \label{tab:supplement-amir-constants}
+\end{table}
+
+%###################################################################################################
+% \paragraph*{Analysis \& Usage of heterogeneous Parameter Value (TODO)}
+% \label{sec:supplement-reuse-estimated-parameters}
+% In order to reuse this model, we also provide the option to assign growth rates by sampling from a
+% normal distribution with user-defined parameters.
