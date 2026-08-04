@@ -275,22 +275,8 @@ our established theoretical methods and computational functionalities.
 
 \begin{figure}[H]
     \centering
-    \begin{tikzonimage}[width=0.5\textwidth]
-        {figures/docs/mechanics.pdf}
-        \node at (0, 1)[anchor=north west]{\textbf{A}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.5\textwidth]
-        {figures/docs/interaction.pdf}
-        \node at (0, 1)[anchor=north west]{\textbf{B}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.5\textwidth]
-        {figures/docs/mie-potential-shapes.pdf}
-        \node at (0, 1)[anchor=north west]{\textbf{C}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.5\textwidth]
-        {figures/docs/morse-potential-shapes.pdf}
-        \node at (0, 1)[anchor=north west]{\textbf{D}};
-    \end{tikzonimage}%
+    \includegraphics[width=\textwidth]{figures/docs/mechanics-interaction.pdf}
+    \includegraphics[width=\textwidth]{figures/docs/interaction-potentials.pdf}
     \caption{
         (A) Example of an elonged bacterial rod represented by a collection of vertices which are
         connected by springs.
@@ -579,20 +565,7 @@ The resulting image is shown in Figure~\ref{fig:progression-image-generation} (C
 
 \begin{figure}[H]
     \centering
-    \begin{tikzonimage}[width=0.32\textwidth]
-        {figures/docs/imaging-mesh.pdf}
-        \node at (0.025, 0.975)[anchor=north west]{\textbf{A}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.32\textwidth]
-        {figures/docs/11571737453049821261/raw_pv/000000400.png}
-        \node at (0.025, 0.975)[anchor=north west, white]{\textbf{B}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.32\textwidth]
-        {figures/docs/11571737453049821261/masks/000000400.png}
-        \node at (0.025, 0.975)[anchor=north west, white]{\textbf{C}};
-    \end{tikzonimage}
+    \includegraphics[width=\textwidth]{figures/docs/imaging.pdf}
     \caption{
         (A) Cells are rendered by combining spheres and cylinders into a single mesh.
         Spheres are highlighted in blue and cylinders in gray.
@@ -723,62 +696,8 @@ Further details such as information about the covariances are given in the suppl
 
 \begin{figure}[H]
     \centering
-    \begin{tikzonimage}[width=0.36\textwidth]
-        {figures/docs/fitting-methods/algorithm/image001042.png}
-        \node at (0.025, 0.975)[anchor=north west, white]{\textbf{A}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.36\textwidth]
-        {figures/docs/fitting-methods/algorithm/mask-zoom.pdf}
-        \node at (0.025, 0.975)[anchor=north west, white]{\textbf{B}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.255\textwidth]
-        {figures/docs/fitting-methods/algorithm/interpolate-positions.pdf}
-        \node at (0.025, 0.975)[anchor=north west, white]{\textbf{C}};
-    \end{tikzonimage}\\
-    \vspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-001800.pdf}
-        \node at (0.03, 0.99)[anchor=north west, white]{\textbf{D}};
-    \end{tikzonimage}%
-    \hspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-003800.pdf}
-        \node at (0.03, 0.99)[anchor=north west, white]{\textbf{E}};
-    \end{tikzonimage}%
-    \hspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-005800.pdf}
-        \node at (0.03, 0.99)[anchor=north west, white]{\textbf{F}};
-    \end{tikzonimage}%
-    \hspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-007800.pdf}
-        \node at (0.03, 0.99)[anchor=north west, white]{\textbf{G}};
-    \end{tikzonimage}%
-    \hspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-009800.pdf}
-        \node at (0.03, 0.99)[anchor=north west, white]{\textbf{H}};
-    \end{tikzonimage}%
-    \hspace{0.004\textwidth}%
-    \begin{tikzonimage}[width=0.1625\textwidth]
-        {figures/docs/fitting-methods/extract_positions-009800-cropped.pdf}%
-        \node at (0, 1)[anchor=north west, white]{\textbf{I}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/docs/fitting-methods/displacement-calculations.pdf}%
-        \node at (0, 1)[anchor=north west, black]{\textbf{J}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/docs/fitting-methods/displacement-distribution.pdf}
-        \node at (0, 1)[anchor=north west, black]{\textbf{K}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/docs/fitting-methods/displacement-fit-over-time.pdf}
-        \node at (0, 1)[anchor=north west, black]{\textbf{L}};
-    \end{tikzonimage}%
+    \includegraphics[width=\textwidth]{figures/docs/fitting-methods/extract_positions.pdf}
+    \includegraphics[width=\textwidth]{figures/docs/fitting-methods/displacement-calculations-1.pdf}
     \caption{
         (A) Microscopic image used as input for the extraction algorithm.
         (B) Result of the skeletonization algorithm for a single cell.
@@ -1193,44 +1112,45 @@ transient information.
 
 \begin{figure}[H]
     \centering
-    \begin{tikzonimage}[width=0.3\textwidth]
-        {figures/crm_amir/progressions/step4-000010.png}
-        \node at (0.02,17pt)[anchor=north west, white]{\textbf{A}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.3\textwidth]
-        {figures/crm_amir/progressions/step4-000017.png}
-        \node at (0.02,17pt)[anchor=north west, white]{\textbf{B}};
-    \end{tikzonimage}%
-    \hspace{0.01\textwidth}%
-    \begin{tikzonimage}[width=0.3\textwidth]
-        {figures/crm_amir/progressions/step4-000034.png}
-            \node at (0.01, 0.01+17pt)[anchor=north west, white]{\textbf{C}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles-reduced/fit-comparison.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{B}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles/drag_force.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{D}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles/growth_rate.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{E}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles/rod_rigidity.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{F}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles/spring_tension.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{G}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.33\textwidth]
-        {figures/crm_amir/profiles/damping.pdf}%
-        \node at (0.13, 0.88)[anchor=north west, black]{\textbf{H}};
-    \end{tikzonimage}%
+    % \begin{tikzonimage}[width=0.3\textwidth]
+    %     {figures/crm_amir/progressions/step4-000010.png}
+    %     \node at (0.02,17pt)[anchor=north west, white]{\textbf{A}};
+    % \end{tikzonimage}%
+    % \hspace{0.01\textwidth}%
+    % \begin{tikzonimage}[width=0.3\textwidth]
+    %     {figures/crm_amir/progressions/step4-000017.png}
+    %     \node at (0.02,17pt)[anchor=north west, white]{\textbf{B}};
+    % \end{tikzonimage}%
+    % \hspace{0.01\textwidth}%
+    % \begin{tikzonimage}[width=0.3\textwidth]
+    %     {figures/crm_amir/progressions/step4-000034.png}
+    %         \node at (0.01, 0.01+17pt)[anchor=north west, white]{\textbf{C}};
+    % \end{tikzonimage}\\
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles-reduced/fit-comparison.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{B}};
+    % \end{tikzonimage}%
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles/drag_force.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{D}};
+    % \end{tikzonimage}%
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles/growth_rate.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{E}};
+    % \end{tikzonimage}\\
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles/rod_rigidity.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{F}};
+    % \end{tikzonimage}%
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles/spring_tension.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{G}};
+    % \end{tikzonimage}%
+    % \begin{tikzonimage}[width=0.33\textwidth]
+    %     {figures/crm_amir/profiles/damping.pdf}%
+    %     \node at (0.13, 0.88)[anchor=north west, black]{\textbf{H}};
+    % \end{tikzonimage}%
+    \includegraphics[width=\textwidth]{figures/crm_amir/profiles.pdf}
     \caption{
         (A-C) Manually segmented experimental snapshots of by Amir et al.~\cite{Amir2014_2}.
         The red line within the green mask shows the extracted position.
@@ -1294,6 +1214,7 @@ Section~\ref{subsec:image-space-metric}).
         \node at (0.02, 0.98)[anchor=north west, white]{\textbf{C}};
     \end{tikzonimage}%
     \hspace{0.01\textwidth}%
+    % TODO Use matplotlib to combine plots
     \begin{tikzonimage}[width=0.35\textwidth]
         {figures/crm_estimate_params/IWF-Goettingen/positions/rod-lengths-individual.pdf}%
         \node at (0, 1)[anchor=north west, black]{\textbf{D}};
@@ -1426,54 +1347,7 @@ greater uncertainty in the predicted parameter value.
 
 \begin{figure}[H]
     \centering
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-damping.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{A}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-potential-stiffness.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{B}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-exponent-n.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{C}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-exponent-m.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{D}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-strength.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{E}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-radius.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{F}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-0.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{G}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-1.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{H}};
-    \end{tikzonimage}\\
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-2.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{I}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-3.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{J}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-4.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{K}};
-    \end{tikzonimage}%
-    \begin{tikzonimage}[width=0.25\textwidth]
-        {figures/crm_fit/profiles/profile-growth-rate-5.pdf}%
-        \node at (0, 1.1)[anchor=north west, black]{\textbf{L}};
-    \end{tikzonimage}%
+    \includegraphics[width=\textwidth]{figures/crm_fit/profiles/profiles-all.pdf}
     \caption{
         (A-L) Likelihood profiles for 4 scenarios: Full and reduced model, by setting the damping
         constant to $\lambda=\SI{1}{\per\minute}$, with Morse/Mie interaction.
