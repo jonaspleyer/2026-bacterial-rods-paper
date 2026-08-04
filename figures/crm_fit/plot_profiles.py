@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 import numpy as np
 from pathlib import Path
-import scipy as sp
 
 import cr_mech_coli as crm
 from cr_mech_coli import crm_fit
@@ -149,20 +149,60 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
             else:
                 infos_combined[name] = [(n, p, label, name, short, units, kwargs)]
 
+    crm.plotting.set_mpl_rc_params()
+    fig = plt.figure(figsize=(32, 24))
+    gs = mpl.gridspec.GridSpec(3, 4, figure=fig)
+    gs1 = gs[1, 0].subgridspec(1, 2, wspace=0)
+
+    axs_list = []
+    for i in range(3):
+        for j in range(4):
+            ax = fig.add_subplot(gs[i, j])
+            axs_list.append(ax)
+
+    order = {
+        "damping": 0,
+        "potential-stiffness": 1,
+        "exponent-n": 2,
+        "exponent-m": 3,
+        "strength": 4,
+        "radius": 5,
+        "growth-rate-0": 6,
+        "growth-rate-1": 7,
+        "growth-rate-2": 8,
+        "growth-rate-3": 9,
+        "growth-rate-4": 10,
+        "growth-rate-5": 11,
+    }
+    ax_labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
     for inf in infos_combined.values():
-        crm.plotting.set_mpl_rc_params()
-        fig, ax = plt.subplots(figsize=(8, 8))
+        name = inf[0][3]
+        savename = name.strip().replace(" ", "-").lower()
+        n = order[savename]
+        label = ax_labels[n]
+        ax = axs_list[n]
         crm.plotting.configure_ax(ax)
 
         xall, yall, name = __add_profiles_to_axis(inf, ax)
+        ax.text(
+            0.03,
+            0.97,
+            label,
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+        )
 
         if len(xall) == 0:
             return None
 
         ncol = max(2, round(len(inf) / 2))
-        fig.legend(
+        ax.legend(
             loc="upper center",
-            bbox_to_anchor=(0.525, 1) if len(xall) >= 3 else (0.525, 0.975),
+            bbox_to_anchor=(0.5, 1.175) if len(xall) >= 3 else (0.5, 1.115),
             ncol=ncol,
             frameon=False,
         )
@@ -176,18 +216,19 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
                 ax.set_xlim(xmin - 0.05 * dx, xmax + 0.05 * dx)
             elif len(b) == 3:
                 xlabel = ax.get_xlabel()
-                plt.close(fig)
-                fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 8), sharey=True)
+                ax.remove()
+                ax1 = fig.add_subplot(gs1[0])
+                ax2 = fig.add_subplot(gs1[1], sharey=ax1)
+
                 crm.plotting.configure_ax(ax1)
                 crm.plotting.configure_ax(ax2)
 
-                fig.subplots_adjust(wspace=0)
                 lims1 = (b[0], b[1])
                 lims2 = (b[1], b[2])
 
                 ax1.spines.right.set_visible(False)
                 # ax2.spines.left.set_visible(False)
-                ax2.tick_params(left=False)
+                ax2.tick_params(labelleft=False)
 
                 __add_profiles_to_axis(inf, ax1)
                 __add_profiles_to_axis(inf, ax2)
@@ -202,11 +243,11 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
                 ax2.xaxis.set_ticks([0.5 * (lims2[0] + lims2[1]), lims2[1]])
 
                 handles, labels = ax1.get_legend_handles_labels()
-                fig.legend(
+                ax1.legend(
                     handles,
                     labels,
                     loc="upper center",
-                    bbox_to_anchor=(0.525, 1.0) if len(xall) >= 3 else (0.525, 0.975),
+                    bbox_to_anchor=(1.0, 1.175) if len(xall) >= 3 else (1.0, 1.115),
                     ncol=ncol,
                     frameon=False,
                 )
@@ -220,7 +261,7 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
             dx = xmax - xmin
             ax.set_xlim(xmin - 0.05 * dx, xmax + 0.05 * dx)
 
-        fig.suptitle(name, y=1.0, ha="center", va="top")  # , pad=55.0)
+        # ax.set_title(name, y=1.0, ha="center", va="top")  # , pad=55.0)
         # fig.supxlabel(
         #     axs[0].get_xlabel(), y=0, ha="center", va="bottom", fontsize="medium"
         # )
@@ -230,11 +271,10 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
             # ax.set_xlabel(None)
             ax.set_title(None)
 
-        odir.mkdir(parents=True, exist_ok=True)
-        savename = name.strip().replace(" ", "-").lower()
-        fig.savefig(odir / f"profile-{savename}.png")
-        fig.savefig(odir / f"profile-{savename}.pdf")
-        plt.close(fig)
+    odir.mkdir(parents=True, exist_ok=True)
+    fig.tight_layout()
+    fig.savefig(odir / "profiles-all.pdf")
+    plt.close(fig)
 
 
 def plot_optimization_progressions_combined(*args, ylim=(0.9, 1.45)):
@@ -288,7 +328,7 @@ if __name__ == "__main__":
         ),
         (path_mie_all, "Mie", {"linestyle": "--", "color": COLOR5}),
         (path_mie_partial, "Mie λ=1min$^{-1}$", {"linestyle": "-.", "color": COLOR6}),
-        odir=Path("figures/crm_fit/profiles"),
+        odir=Path("figures/crm_fit"),
         bounds=bounds,
     )
 
