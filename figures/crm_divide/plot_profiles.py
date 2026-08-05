@@ -3,11 +3,13 @@ import matplotlib as mpl
 import numpy as np
 from pathlib import Path
 from tqdm import tqdm
+import string
 
 import cr_mech_coli as crm
 
 
 def plot_profile_single(
+    ax,
     samples: np.ndarray[tuple[int], np.dtype[np.float64]],
     costs: np.ndarray[tuple[int, int], np.dtype[np.float64]],
     p_fixed: float,
@@ -62,40 +64,19 @@ def plot_profile_single(
     cwoup = cwoup[sorter]
     cwopp1 = cwopp1[sorter]
 
-    fig, ax = plt.subplots(figsize=(8, 8))
+    # fig, ax = plt.subplots(figsize=(8, 8))
     crm.plotting.configure_ax(ax)
 
     ax.plot(x, cwo, c=crm.plotting.COLOR3, label="Metric")
     ax.plot(x, cwoup, c=crm.plotting.COLOR3, linestyle="--", label="Overlaps p$_o$=0")
     ax.plot(x, cwopp1, c=crm.plotting.COLOR3, linestyle=":", label="Parents p$_p$=1")
 
-    handles, labels = ax.get_legend_handles_labels()
-    empty_handle = mpl.lines.Line2D([], [], alpha=0)
-    ax.legend(
-        labels=[labels[0], "", *labels[-2:]],
-        handles=[handles[0], empty_handle, *handles[-2:]],
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1.16),
-        ncol=2,
-        frameon=False,
-    )
-
     ax.scatter([p_fixed], [cwo_fin], c=crm.plotting.COLOR5, marker="x")
     ax.scatter([p_fixed], [cwoup_fin], c=crm.plotting.COLOR5, marker="x")
     ax.scatter([p_fixed], [cwopp1_fin], c=crm.plotting.COLOR5, marker="x")
 
     ax.set_xlabel(f"{name} {short} [{units}]")
-    ax.set_ylabel(f"PL({short}) - L(θ)")
     ax.ticklabel_format(axis="y", style="sci", scilimits=(0, 1))
-
-    opath1 = Path("figures/crm_divide/profiles-pretty/pdf/")
-    opath2 = Path("figures/crm_divide/profiles-pretty/png/")
-    opath1.mkdir(exist_ok=True, parents=True)
-    opath2.mkdir(exist_ok=True, parents=True)
-    savename = name.replace(" ", "-").lower()
-    fig.savefig(opath1 / f"profile-{savename}.pdf")
-    fig.savefig(opath2 / f"profile-{savename}.png")
-    plt.close(fig)
 
 
 if __name__ == "__main__":
@@ -136,6 +117,49 @@ if __name__ == "__main__":
 
     crm.plotting.set_mpl_rc_params()
 
-    for n, pinfo in tqdm(enumerate(param_infos), total=len(param_infos)):
+    legend_pad_1 = 0.02
+    legend_pad_2 = 0.04
+    fig1, axs1 = plt.subplots(4, 4, figsize=(24, 24 / (1 - legend_pad_1)))
+    fig2, axs2 = plt.subplots(2, 4, figsize=(24, 12 / (1 - legend_pad_2)))
+    axs_all = [*axs1.flatten(), *axs2.flatten()]
+
+    labels = string.ascii_uppercase[: len(param_infos)]
+    for n, (pinfo, ax, label) in tqdm(
+        enumerate(zip(param_infos, axs_all, labels)),
+        total=len(param_infos),
+    ):
+        ax.text(
+            0.03,
+            0.97,
+            label,
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+        )
         p_fixed = result[n]
-        plot_profile_single(samples[:, n], costs[:, n], p_fixed, final_costs, *pinfo)
+        plot_profile_single(
+            ax, samples[:, n], costs[:, n], p_fixed, final_costs, *pinfo
+        )
+
+    handles, labels = axs1[0, 0].get_legend_handles_labels()
+    for fig in [fig1, fig2]:
+        fig.legend(
+            labels=[labels[0], *labels[-2:]],
+            handles=[handles[0], *handles[-2:]],
+            loc="upper center",
+            bbox_to_anchor=(0.5, 1.0),
+            ncol=3,
+            frameon=False,
+        )
+
+    for ax in axs_all[len(param_infos) :]:
+        ax.set_axis_off()
+
+    fig1.tight_layout(rect=(0, 0, 1, 1 - legend_pad_1))
+    fig2.tight_layout(rect=(0, 0, 1, 1 - legend_pad_2))
+
+    fig1.savefig("figures/crm_divide/profiles-1.pdf")
+    fig2.savefig("figures/crm_divide/profiles-2.pdf")
