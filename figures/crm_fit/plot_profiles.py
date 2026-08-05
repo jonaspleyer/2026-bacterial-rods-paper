@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import numpy as np
 from pathlib import Path
+import string
 
 import cr_mech_coli as crm
 from cr_mech_coli import crm_fit
@@ -277,34 +278,50 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
     plt.close(fig)
 
 
-def plot_optimization_progressions_combined(*args, ylim=(0.9, 1.45)):
+def plot_optimization_progressions_combined(
+    *args, crm_divide_evals_path, ylim=(0.9, 1.45)
+):
     crm.plotting.set_mpl_rc_params()
-    fig, ax = plt.subplots(figsize=(8, 8))
-    crm.plotting.configure_ax(ax)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 12))
+    crm.plotting.configure_ax(ax1)
 
     for p, label, linestyle, color in args:
         # Load results
         result = crm_fit.OptimizationResult.load_from_file(p / "final_params.toml")
         y = result.evals
         x = np.arange(1, len(y) + 1)
-        ax.plot(x, y, label=label, color=color, linestyle=linestyle)
+        ax1.plot(x, y, label=label, color=color, linestyle=linestyle)
 
-    ax.set_xscale("log")
+    ax1.set_xscale("log")
     # ax.set_yscale("log")
-    ax.set_ylim(*ylim)
+    ax1.set_ylim(*ylim)
 
-    ax.set_xlabel("Iterations")
-    ax.set_ylabel("Cost Function")
+    ax1.set_xlabel("Iterations")
+    ax1.set_ylabel("Cost Function")
+    ax1.legend(loc="upper center", bbox_to_anchor=(0.5, 1.08), ncol=4, frameon=False)
 
-    ncol = max(2, round(len(args) / 2))
-    ax.legend(
-        loc="upper center",
-        bbox_to_anchor=(0.5, 1.15) if len(args) >= 3 else (0.5, 1.125),
-        ncol=ncol,
-        frameon=False,
-    )
-    fig.savefig("figures/crm_fit/optimization-progression.png")
-    fig.savefig("figures/crm_fit/optimization-progression.pdf")
+    for n, ax in enumerate([ax1, ax2]):
+        ax.text(
+            0.03,
+            0.97,
+            string.ascii_uppercase[n],
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+        )
+
+    crm.configure_ax(ax2)
+    evals = np.genfromtxt(crm_divide_evals_path, delimiter=",")
+    ax2.plot(evals, color=COLOR3, label="crm_divide")
+    ax2.set_xscale("log")
+    ax2.set_xlabel("Iterations")
+    ax2.legend(loc="upper center", bbox_to_anchor=(0.5, 1.08), frameon=False)
+
+    fig.tight_layout()
+    fig.savefig("figures/crm-fit-divide-progression.pdf")
 
 
 if __name__ == "__main__":
@@ -337,4 +354,5 @@ if __name__ == "__main__":
         (path_morse_partial, "Morse λ=1min$^{-1}$", "-.", COLOR3),
         (path_mie_all, "Mie", "--", COLOR5),
         (path_mie_partial, "Mie λ=1min$^{-1}$", "-.", COLOR6),
+        crm_divide_evals_path="figures/crm_divide/optimization_evals.csv",
     )
