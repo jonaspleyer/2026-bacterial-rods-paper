@@ -161,6 +161,19 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
             ax = fig.add_subplot(gs[i, j])
             axs_list.append(ax)
 
+    def add_text_to_ax(ax, label):
+        ax.text(
+            0.03,
+            0.97,
+            label,
+            fontsize=40,
+            fontweight="semibold",
+            fontfamily="serif",
+            va="top",
+            horizontalalignment="left",
+            transform=ax.transAxes,
+        )
+
     order = {
         "damping": 0,
         "potential-stiffness": 1,
@@ -185,17 +198,7 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
         crm.plotting.configure_ax(ax)
 
         xall, yall, name = __add_profiles_to_axis(inf, ax)
-        ax.text(
-            0.03,
-            0.97,
-            label,
-            fontsize=40,
-            fontweight="semibold",
-            fontfamily="serif",
-            va="top",
-            horizontalalignment="left",
-            transform=ax.transAxes,
-        )
+        add_text_to_ax(ax, label)
 
         if len(xall) == 0:
             return None
@@ -220,6 +223,7 @@ def plot_all_profiles_combined(*args, odir, bounds={}):
                 ax.remove()
                 ax1 = fig.add_subplot(gs1[0])
                 ax2 = fig.add_subplot(gs1[1], sharey=ax1)
+                add_text_to_ax(ax1, label)
 
                 crm.plotting.configure_ax(ax1)
                 crm.plotting.configure_ax(ax2)
