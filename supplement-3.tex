@@ -15,12 +15,11 @@ Their particular numerical values are not relevant to the methods proposed in th
 For studies targeting to extract precise numerical
 values a closer inspection and clarification would be required.
 The same parameter estimations can also be achieved by using pixel-based units.
-Such changes will leave the profiles unchanged since both the units of the vertices $\vec{x}_i$ and
-of the displacement uncertainty $\sigma$ will be rescaled which will cancel out.
-This can be seen directly when inspecting equations~\ref{eq:parameter-estimation-log-likelihood} and
-\ref{eq:parameter-estimation-least-squares}.
-Furthermore, values of the Lineage-aware Image-Space metric
-(equation~\ref{eq:Lineage-aware-image-space-metric}) will also be left untouched since the image
+Such changes leaves the profiles unchanged since both the units of the vertices $\vec{x}_i$ and
+of the displacement uncertainty $\sigma$ are rescaled (see
+equation~\ref{eq:parameter-estimation-log-likelihood}).
+Furthermore, values of the lineage-aware image-space metric
+(equation~\ref{eq:Lineage-aware-image-space-metric}) are also scale-invariant since the image
 resolution does not change.
 
 The obtained constants are listed in Table~\ref{tab:supplement-application-1-constants}.
@@ -72,7 +71,7 @@ Subsection~\ref{sec:application-1-without-division}.
     \caption{
         Optimization progression of the distinct model choices analyzed in
         Section~\ref{section:application-2}.
-        All cost functions exhibit rapic decay before a final optimum is reached.
+        All cost functions exhibit rapid decay before a final optimum is reached.
         The relative tolerance of the optimization algorithm was chosen conservatively low such that
         stability of the final optimum is ensured.
         (A) Progressions of cost functions for model choices without division events in units
@@ -88,10 +87,10 @@ daughter cells left out in Figure~\ref{fig:likelihood-profiles-comparison-with-d
 Some of these parameter values such as (A),(C) and (E) could be compatible with a vanishing growth
 rate.
 However these statements can only be completely justified if we can provide a good estimate for the
-displacement uncertainty $\sigma$ in pixel space with respect to the  newly defined Lineage-aware
-Image-Space metric.
+displacement uncertainty $\sigma$ in pixel space with respect to the  newly defined lineage-aware
+image-space metric.
 This requires further mathematical attention to its definition.
-Furthermore, results from section~\ref{section:application-2} have shown that growth rates and
+Furthermore, results from Section~\ref{section:application-2} have shown that growth rates and
 division lengths can be estimated much more accurately when a division event is involved, thus
 providing effectively a lower and upper bound on both values.
 Furthermore, the results from Section~\ref{section:application-2} show that growth rates and
@@ -113,23 +112,23 @@ interval after division.
     \label{fig:supplement-profiles-with-division}
 \end{figure}
 
-In order to assess the accuracy of the estimated parameters in relation to our model, we can examine
+To assess the accuracy of the estimated parameters in relation to our model, we can examine
 the contributions to the cost function at each time point in the simulation.
 We expect that the differences indicated by the cost function are minimal at the start point and
 grow as time progresses.
-Our system ins inherently non-linear, containing exponential growth and complex interaction forces.
+Our system is inherently non-linear, containing exponential growth and complex interaction forces.
 This means that any parameter choice which is not optimal can lead to large deviations with
 increasing time.
-For a Lipschitz-continous system, this deviation can be bound by an exponential envelope of
+For a Lipschitz-continuous system, this deviation can be bound by an exponential envelope of
 differences surrounding the true values, which results in an exponential temporal progression of the
 cost function itself.
 
 Figure~\ref{fig:supplement-cost-evolution-time} shows the contributions of the individual time
-points to the total Lineage-aware Image-Space metric.
+points to the total lineage-aware image-space metric.
 As expected, the fully optimized system (orange) does not contain any cases where the parent penalty
-$p_p$ is utilized.
-When increasing the growth rates of all cells by $20\%$ (blue curves), we can see the non-linear
-nature of our system come into play.
+$p_p$ is used.
+When increasing the growth rates of all cells by $20\%$ (blue curves), the non-linear
+nature of our system becomes apparent.
 This change leads to a division time much earlier than in the fully optimized case which therefore
 makes use of the parent penalty $p_p$.
 The blue curves show 3 scenarios assigning $p_p=1,0.5,0$ respectively.
@@ -148,10 +147,10 @@ bacteria are within close temporal proximity to each other.
     \centering
     \includegraphics[width=0.5\textwidth]{figures/crm_divide/time-evolution.pdf}%
     \caption{
-        Contributions to the Lineage-aware Image-Space metric at evaluated time points of the
+        Contributions to the lineage-aware image-space metric at evaluated time points of the
         simulation.
         The fully optimized system (orange) does not contain any configurations in which a parent
-        penalty $p_p$ is utilized.
+        penalty $p_p$ is used.
         When increasing the growth rates of each cell by $20\%$, we can clearly see the effect of
         the parent penalty.
         The case $p_p=1$ will result in full weighting of parental differences, while $p_p=0.5$
