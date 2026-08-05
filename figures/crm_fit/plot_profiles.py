@@ -319,6 +319,7 @@ def plot_optimization_progressions_combined(
 
     crm.configure_ax(ax2)
     evals = np.genfromtxt(crm_divide_evals_path, delimiter=",")
+    evals = np.sort(evals)[::-1]
     ax2.plot(evals, color=COLOR3, label="crm_divide")
     ax2.set_xscale("log")
     ax2.set_xlabel("Iterations")
