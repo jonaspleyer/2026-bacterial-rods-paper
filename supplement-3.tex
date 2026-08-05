@@ -58,14 +58,20 @@ These can be found in the \texttt{data} folder of the GitHub repository:
 % \end{enumerate}
 
 Figure~\ref{fig:supplement-optimization-progression} shows the progression of the raw cost function
-(not normalized by the squared uncertainty of the displacements) of the various optimizations.
-
+(not normalized) of the various optimizations.
+Figure (A) shows that all optimization routines converge, with varying properties.
+The morse-type models achieve a lower (better) cost while both mie-type models remain at higher cost
+values.
+In addition, the reduced models where $\lambda=\SI{1}{\per\minute}$ converge faster.
+These findings further undermine the results presented in
+Subsection~\ref{sec:application-1-without-division}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/crm-fit-divide-progression.pdf}
     \caption{
-        Optimization progression of the distinct model choices analyzed in Section~\ref{section:application-2}.
+        Optimization progression of the distinct model choices analyzed in
+        Section~\ref{section:application-2}.
         All cost functions exhibit rapic decay before a final optimum is reached.
         The relative tolerance of the optimization algorithm was chosen conservatively low such that
         stability of the final optimum is ensured.
