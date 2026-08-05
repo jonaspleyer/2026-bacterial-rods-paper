@@ -194,7 +194,6 @@ cellular behaviors.
 %###################################################################################################
 \section{A Computational Model for Rod-Shaped Bacteria}
 \label{sec:computational-model}
-
 The mechanical behavior of rod-shaped bacteria is governed by many effects.
 In this work, we aim to establish a model which is general enough such that it can be reused as the
 basis for many variants of rod-shaped bacteria but also explicit enough such that we can quantify
@@ -348,13 +347,13 @@ and are integrated via damped newtonian dynamics:
 \begin{equation}
     \partial_t^2 \vec{x}_i = \vec{F}_{i,\text{total}} - \lambda \partial_t\vec{x}_i,
 \end{equation}
-where $\lambda$ a damping constant. The equations have been rescaled by the mass, thus effectively
+where $\lambda$ a damping constant.
+The equations have been rescaled by the mass, thus effectively
 eliminating this parameter and simplifying the model. All involved parameters and their units can
 be viewed in Table~\ref{table:list-of-parameters}.
 
 % --------------------------------------------------------------------------------------------------
 \subsection{Physical Interactions between bacteria}
-
 The physical interaction between bacteria plays a crucial role in the overall dynamics of the
 system.
 The interactions can be phenomenologically described by simple, interpretable potentials with a low
@@ -986,8 +985,8 @@ reacts to horizontal fluid flow exerting a force on the bacterium.
 The experiment is particularly suited as a first attempt since it excludes cell-cell interactions
 and focuses on the behavior of a single cell.
 It therefore reduces the total number of parameters and allows for fast iteration times when
-performing parameter estimations. To model this configuration, the lowermost vertex of the rod is
-fixed at the base of the simulation
+performing parameter estimations.
+To model this configuration, the lowermost vertex of the rod is fixed at the base of the simulation
 domain and vertices which are inside the tubulus are restricted to move only in the y-direction.
 
 The flow profile for this setup is proportional~\cite{Wolschin2021} to $(2y_iy_\text{max}-y_i^2)$
@@ -1023,7 +1022,7 @@ over a span of $\SI{17}{\second}$.
 
 Since this setup is void of any cell-cell interactions or cell division, the dynamics of the cell
 can be described by a combination of growth and physical mechanics (see
-subSection~\ref{subsection:mechanical-model-mechanics}).
+Subsection~\ref{subsection:mechanical-model-mechanics}).
 We are thus left with 5 parameters: magnitude of the drag force $C$, growth rate $\alpha$, rigidity
 of the rod $\eta$, spring tension $\gamma$ and damping constant $\lambda$ (see
 Table~\ref{table:list-of-parameters}).
