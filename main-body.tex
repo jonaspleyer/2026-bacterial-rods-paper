@@ -131,7 +131,7 @@ cellular behaviors.
 % This work consists of many subcomponents which can be combined in order to achieve various tasks.
 % Figure~\ref{fig:flowchart-project-structure} shows a high-level overview of all components.
 % We assume that bacterial rods can be represented by a colleciton of vertices (see
-% section~\ref{subsec:spatial-representation}).
+% Section~\ref{subsec:spatial-representation}).
 % This assumption alone is enough to enable a cascade of other components.
 % Using the spatial representation, we provide visualization methods that employ a 3D rendering
 % engine and can produce cell masks or rendered images from a given configuration.
@@ -161,7 +161,7 @@ cellular behaviors.
 % They allow researchers to obtain feedback quickly and improve iteration times when constructing new
 % models.
 % Furthermore, we utilize them in our image-space metric (see
-% section~\ref{subsec:image-space-metric}) where they enable us to effectively compare
+% Section~\ref{subsec:image-space-metric}) where they enable us to effectively compare
 % two bacterial configurations while accounting for division events.
 % In the future, we are planning to extend the the rendering capabilities of our approach and
 % generate realistic microscopic images and time-series.
@@ -530,7 +530,7 @@ Finally, we will provide two distinct comparison algorithms which can be used to
 obtained results with experimental data. We will test and benchmark the constructed algorithms
 within the respective sections.
 As highlighted before, the developed methods only depend on the spatial representation described in
-section~\ref{subsec:spatial-representation}. Consequently, these methods can be applied to a broader
+Section~\ref{subsec:spatial-representation}. Consequently, these methods can be applied to a broader
 class of mechanical models that can exhibit varied cellular behaviors.
 They are also publicly available as a well-documented open-source python package
 (\href{https://github.com/jonaspleyer/cr_mech_coli}{cr\_mech\_coli}).
@@ -588,7 +588,7 @@ There exists a plethora of tools to perform segmentation of
 images~\cite{Stringer2020,Cutler2022,Hardo2022}. Figure~\ref{fig:position-extraction-algorithm} (A)
 shows a typical microscopic image.
 Our algorithm requires that images are prepared using a pixel-based (in-image) encoding scheme, as
-we explained in section~\ref{subsection:visualization}.
+we explained in Section~\ref{subsection:visualization}.
 
 % Having defined the input type of our algorithm, we proceed with the following 5 steps:
 
@@ -656,7 +656,7 @@ To validate the reliability of the extraction algorithm
 (Algorithm~\ref{algo:extraction-algorithm}), we benchmarked it using synthetic data with known
 ground truth. This reference data in the form of vertices can be obtained directly from our
 computational model.
-Furthermore as we have explained in section~\ref{subsection:visualization}, we generate cell masks
+Furthermore as we have explained in Section~\ref{subsection:visualization}, we generate cell masks
 from a given set of vertices and thickness of the rod which will serve as inputs for our extraction
 algorithm. By comparing the extracted positions with the known ground truth, we will obtain
 quantitative measures of the extraction accuracy.
@@ -887,7 +887,7 @@ assigned for non-matching pixel values whose corresponding cells are not related
 relationship.
 In principle it is also feasible to compare one model output with another which would requires us to
 account for overlaps of the secondary image $\tilde{I}$ in the first condition of
-equation~\ref{eq:Lineage-aware-image-space-metric}.
+Equation~\ref{eq:Lineage-aware-image-space-metric}.
 
 Figure~\ref{fig:mask-difference-metric} (A,B) shows two states of a numerical simulation
 with varying numbers of cells.
@@ -1042,7 +1042,7 @@ $\vec{x}_0$ such that the bacterium is attached to the bottom.
 
 We extract the positions of the rod from the data images (see
 Figure~\ref{fig:amir-bending-simulation} (A)) and compare them with the simulated positions using
-the direct comparison algorithm (see Subsection~\ref{subsec:direct-metric}).
+the direct comparison algorithm (see SubSection~\ref{subsec:direct-metric}).
 Our simulation comprises two phases.
 The first phase involves an external flow force that initially bends the rod and lasts
 $\SI{7}{\second}$.
@@ -1051,7 +1051,7 @@ over a span of $\SI{17}{\second}$.
 
 Since this setup is void of any cell-cell interactions or cell division, the dynamics of the cell
 can be described by a combination of growth and physical mechanics (see
-subsection~\ref{subsection:mechanical-model-mechanics}).
+subSection~\ref{subsection:mechanical-model-mechanics}).
 We are thus left with 5 parameters: magnitude of the drag force $C$, growth rate $\alpha$, rigidity
 of the rod $\eta$, spring tension $\gamma$ and damping constant $\lambda$ (see
 Table~\ref{table:list-of-parameters}).
@@ -1304,7 +1304,7 @@ greater uncertainty in the predicted parameter value.
 In the next step, we extend the analyzed time interval to $\SI{85}{\minute}$, which includes cell
 division events.
 This requires us to use the Lineage-aware Image-Space Metric
-(section~\ref{section:parameter-estimation}).
+(Section~\ref{section:parameter-estimation}).
 A practical challenge in extending the time series arose during data preparation: the segmentation
 algorithm was not able to properly label the individual bacteria for timepoints close to division
 events.
@@ -1455,7 +1455,7 @@ As discussed before, growth rates can be determined by either fitting the expone
 to the count of pixels of the associated instance-level segmentation mask of the cell (Pixel Fit).
 We see that the two methods lead to significant differences between the numerical values.
 
-The next parts contain the results of section~\ref{sec:application-1-with-division} and
+The next parts contain the results of Section~\ref{sec:application-1-with-division} and
 \ref{sec:application-1-without-division} including growth rates of the resulting daughter cells.
 One clear trend within the direct position-space comparison block is the ordering of growth rates.
 The cells with largest to lowest growth rate are 4,2,3,5,1,0 where the order is only violated in
