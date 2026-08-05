@@ -1034,8 +1034,8 @@ and intermediate (bent, dark blue) position of the rod using the optimized param
 
 The corresponding likelihood profiles are displayed in Figure~\ref{fig:amir-bending-simulation}
 (D-H, bright blue curves). It can be seen that the optimized parameters are at the minimum of the
-\texttt{profile-likelihood}.
-However, \texttt{profile-likelihoods} shown in Figure~\ref{fig:amir-bending-simulation} (E-I) are
+\textit{profile-likelihood}.
+However, \textit{profile-likelihoods} shown in Figure~\ref{fig:amir-bending-simulation} (E-I) are
 multimodal, e.g., the corresponding parameters are not unique.
 Furthermore, the damping constant $\lambda$ is indistinguishable from zero within the $68\%$
 lowest confidence interval.
@@ -1059,7 +1059,7 @@ transient information.
         manual segmentation mask (bright green) and extracted position (red).
         The sequence shows the rod initially (A), under flow (B) and after relaxation (C).
         (D) Comparison of simulated and experimental rod in bent and relaxed state.
-        (D-H) Profile-likelihoods for the estimated parameters.
+        (D-H) \textit{Profile-likelihoods} for the estimated parameters.
         Bands of blue and yellow indicate confidence intervals of $68\%,90\%$ and $95\%$.
         Bright blue curves represent the full model, dark blue a reduced model without damping
         $\lambda=0$ and orange curves when fixing the spring tension parameter
@@ -1192,8 +1192,8 @@ to the provided data.
 However, to systematically analyze these differences and investigate if the obtained
 parameters could be identified, we employed the \textit{profile-likelihood} method.
 
-Figure~\ref{fig:parameter-estimates-single-step} shows the profile-likelihoods for each optimized
-parameter.
+Figure~\ref{fig:parameter-estimates-single-step} shows the \textit{profile-likelihoods} for each
+optimized parameter.
 In total, we compare four distinct models, covering both Morse and Mie-type interactions with and
 without a fixed damping constant $\lambda=\SI{1}{\per\minute}$.
 Figure~\ref{fig:parameter-estimates-single-step} (A) displays the \textit{profile-likelihood} for
@@ -1212,7 +1212,8 @@ the potential strength (E) is subject to a practical unidentifiability~\cite{Rau
 resolved by fixing the damping constant to $\lambda=\SI{1}{\per\minute}$.
 The Mie potential uses two parameters $n,m$ (C,D) to determine the shape of the interaction
 potential which allows it to describe a larger class of curves.
-However, as the profile-likelihoods presented in Figure~\ref{fig:parameter-estimates-single-step}
+However, as the \textit{profile-likelihoods} presented in
+Figure~\ref{fig:parameter-estimates-single-step}
 (A,C,D,E) show, that the exponents $n,m$ of the Mie-type interaction can not be estimated, even when
 reducing the model via $\lambda=\SI{1}{\per\minute}$.
 It is necessary to enhance the data set, e.g., by including additional scenes showcasing a greater
@@ -1638,8 +1639,8 @@ together with a visualization pipeline that renders simulation snapshots and gen
 Building on these imaging techniques, we constructed a lineage-aware cost function that compares
 cellular configurations across division events and thereby enables parameter estimation in
 scenarios that were previously inaccessible.
-Combining these advances, we applied profile-likelihood-based parameter estimation to case studies
-of increasing complexity and showed that the involved parameters can be identified, that
+Combining these advances, we applied \textit{profile-likelihood}-based parameter estimation to case
+studies of increasing complexity and showed that the involved parameters can be identified, that
 unidentifiabilities can be detected and removed by classical model reduction, and that individual
 cell-to-cell differences can be recovered.
 
@@ -1662,8 +1663,8 @@ rod-shaped bacteria.
 The code is publicly available as the Python package
 \href{https://github.com/jonaspleyer/cr_mech_coli}{cr\_mech\_coli}, and the underlying cellular
 properties are provided within \texttt{cellular\_raza}~\cite{Pleyer2025}, which lets researchers
-employ well-known methods such as profile-likelihood and sensitivity analysis and reuse, extend and
-combine existing building blocks to incorporate additional biological properties.
+employ well-known methods such as \textit{profile-likelihood} and sensitivity analysis and reuse,
+extend and combine existing building blocks to incorporate additional biological properties.
 
 Future work will explore the data-generation capabilities of the software in more detail; ongoing
 progress already harnesses our model and imaging pipelines to construct near-realistic microscopic
