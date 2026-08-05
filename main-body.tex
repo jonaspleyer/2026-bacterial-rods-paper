@@ -1319,9 +1319,12 @@ However, this approach is still frequently used within the optimization scheme i
 in smoothing the calculation of gradients between distinct results.
 
 % We can again calculate likelihood profiles for every optimized parameter.
-Since further mathematical analysis is required to assess how to use the lineage-aware
-image-space metric for maximum-likelihood approaches, we simply display profiles of the cost
-function when fixing a single parameter and reoptimizing the remaining ones.
+In order to accurately calculate confidence bands for the optimized parameters, we would require
+further mathematical analysis to assess how uncertainties can be incorporated into our lineage-aware
+image-space metric.
+Instead, we simply display profiles of the cost function directly, without normalizing by any
+variances.
+We fix a single parameter and reoptimize all remaining ones.
 While only confidence bands for likelihood profiles as presented in the previous sections could
 provide a clearer picture regarding the identifiability of the parameters, we can still
 identify some trends.
