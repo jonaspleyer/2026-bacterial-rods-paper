@@ -174,6 +174,19 @@ Rust-based backend.
 They integrate with our previously developed agent-based simulation framework \texttt{cellular\_raza}.
 
 \section*{Author summary}
+Bacteria such as \acl{ecoli} and \acl{bsubtilis} are shaped like flexible rods that grow, bend,
+push against one another and divide. Capturing this mechanical behavior in a computer model is
+difficult, and an even harder problem is to determine the numerical values of the model parameters
+from experimental images -- a step that is essential if a model is to be trusted, interpreted and
+compared to biological reality. Here we present a computational framework that represents rod-shaped
+bacteria as deformable, growing rods and, crucially, a set of methods that link such models
+directly to microscopy data. Our methods read cell shapes from segmented images and compare them
+with simulations on a cell-by-cell basis, even across cell-division events, which normally break
+such comparisons. Using maximum-likelihood and profile-likelihood techniques we estimate the model
+parameters, assess how reliably each parameter is determined and reduce the model where the data do
+not constrain it. We show that individual differences between cells, such as their growth rates, can
+be recovered directly from routine time-lapse microscopy. The methods are released as an open,
+modular software package and can be reused for a wide range of models of rod-shaped organisms.
 
 \linenumbers
 
