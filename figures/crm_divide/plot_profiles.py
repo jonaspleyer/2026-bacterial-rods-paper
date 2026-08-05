@@ -123,7 +123,7 @@ if __name__ == "__main__":
     fig2, axs2 = plt.subplots(2, 4, figsize=(24, 12 / (1 - legend_pad_2)))
     axs_all = [*axs1.flatten(), *axs2.flatten()]
 
-    labels = string.ascii_uppercase[: len(param_infos)]
+    labels = [*string.ascii_uppercase[:16], *string.ascii_uppercase[:5]]
     for n, (pinfo, ax, label) in tqdm(
         enumerate(zip(param_infos, axs_all, labels)),
         total=len(param_infos),
