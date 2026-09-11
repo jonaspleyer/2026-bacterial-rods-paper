@@ -175,44 +175,49 @@ Jonas Pleyer\textsuperscript{1}, Christian Fleck\textsuperscript{1}\\
 
 %###################################################################################################
 \section*{Abstract}
-Elongated bacteria such as \acl{ecoli} and \acl{bsubtilis} possess distinct mechanical
-and physiological properties that shape their growth, division, and collective behaviors.
-Despite their importance, existing computational frameworks rarely capture these organisms'
-flexible filamentous morphology.
-This limits the ability to study their mechanics systematically and quantitatively.
-Agent-based models are well suited for representing individual cells and their interactions, yet
-their application to flexible rod-shaped bacteria has been hindered by the absence of appropriate
-mechanical formulations and by the lack of practical methods for estimating model parameters from
-experimental data.
-In this work, we introduce a computational model that represents elongated bacteria as deformable
-rods capable of growth, elastic bending, and mechanical interactions.
-We develop a novel set of imaging- and geometry-based methods that extract cell shape and positional
-information from segmented microscopy data and quantitatively compare it with model simulations at
-the single-cell level.
-These methods allow for a detailed analysis of the underlying dynamics of the model and enable the
-application of maximum-likelihood and profile-likelihood estimation techniques to determine
-the parameters of the model. We apply the developed methods to multiple experimental scenarios of
-increasing complexity, including cases that
-exhibit substantial cell-cell variability.
-We demonstrate how these methods can be used for model validation and reduction.
-The developed methods are readily available as a modular Python package with a high-performing
-Rust-based backend.
-They integrate with our previously developed agent-based simulation framework \texttt{cellular\_raza}.
+Elongated bacteria, such as \acl{ecoli} and \acl{bsubtilis}, are flexible, filamentous cells whose
+mechanical properties influence their growth, division, and collective behaviors.
+Agent-based models are well suited for representing individual cells and their interactions.
+However, their application to flexible, rod-shaped bacteria has been hindered by the absence of
+appropriate mechanical formulations and, more fundamentally, by the lack of practical methods for
+estimating model parameters from experimental data.
+In this work, we introduce a computational model representing elongated bacteria as deformable rods
+that grow, bend elastically, and interact mechanically.
+We develop a set of imaging- and geometry-based methods that extract cell shape and position from
+segmented microscopy data.
+The extracted shapes and positions are then compared with model simulations at the single-cell
+level.
+A lineage-aware cost function formulated directly in image space extends this comparison across cell
+division events, which a position-based comparison cannot accommodate.
+Together, these methods enable maximum-likelihood and profile-likelihood estimation of the model
+parameters and a systematic analysis of their identifiability.
+We apply these methods to two experimental scenarios of increasing complexity.
+For a single bent bacterium, we demonstrate that the full mechanical model is not identifiable and
+explain how profile likelihoods guide its reduction to an identifiable one.
+For a growing colony, we recover the growth rates and division lengths of individual cells and their
+descendants from routine time-lapse microscopy.
+We also find that the interaction parameters are identifiable for a Morse-type potential but not for
+a Mie-type potential.
+The developed methods are readily available as a modular Python package with a high-performance
+Rust-based backend, and they integrate with our previously developed agent-based simulation
+framework \texttt{cellular\_raza}.
 
 \section*{Author summary}
 Bacteria such as \acl{ecoli} and \acl{bsubtilis} are shaped like flexible rods that grow, bend,
-push against one another and divide. Capturing this mechanical behavior in a computer model is
+push against one another, and divide. Capturing this mechanical behavior in a computer model is
 difficult, and an even harder problem is to determine the numerical values of the model parameters
 from experimental images -- a step that is essential if a model is to be trusted, interpreted and
 compared to biological reality. Here we present a computational framework that represents rod-shaped
 bacteria as deformable, growing rods and, crucially, a set of methods that link such models
 directly to microscopy data. Our methods read cell shapes from segmented images and compare them
 with simulations on a cell-by-cell basis, even across cell-division events, which normally break
-such comparisons. Using maximum-likelihood and profile-likelihood techniques we estimate the model
-parameters, assess how reliably each parameter is determined and reduce the model where the data do
-not constrain it. We show that individual differences between cells, such as their growth rates, can
+such comparisons.
+Subsequently, we estimate these parameters from the images, quantify how firmly each one is pinned
+down by the data, and simplify the model where the data cannot constrain it.
+We show that individual differences between cells, such as their growth rates, can
 be recovered directly from routine time-lapse microscopy. The methods are released as an open,
-modular software package and can be reused for a wide range of models of rod-shaped organisms.
+modular software package and are designed to be reused for a wide range of models of rod-shaped
+organisms.
 
 \linenumbers
 
