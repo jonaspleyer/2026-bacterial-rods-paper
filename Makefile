@@ -2,19 +2,11 @@ CC:=latexmk
 OPTIONS:=-pdf
 TARGET:=main
 
-all: onimage figures coverletter
+all: onimage coverletter
 	$(CC) $(OPTIONS) $(TARGET)
 
 onimage:
 	pdflatex onimage.dtx
-
-figures: overview visualization
-
-overview:
-	$(CC) $(OPTIONS) figures/concept/overview.tex
-
-visualization:
-	$(CC) $(OPTIONS) figures/concept/visualization.tex
 
 coverletter:
 	$(CC) $(OPTIONS) coverletter.tex
