@@ -1,12 +1,3 @@
-\documentclass{standalone}
-\usepackage{tikz}
-
-\input{figures/tikz-preamble.tex}
-
-\newcommand{\height}{2}
-\newcommand{\width}{4}
-
-\begin{document}
 \begin{tikzpicture}[on top/.style={preaction={draw=white,-,line width=#1}},
 on top/.default=4pt]
     \node (sr) [rect]   at (-4, 0)  {Spatial\\ Representation};
@@ -40,4 +31,3 @@ on top/.default=4pt]
     \path [arrow,<->]
         (mo) edge (am);
 \end{tikzpicture}
-\end{document}
