@@ -2,11 +2,8 @@ CC:=latexmk
 OPTIONS:=-pdf
 TARGET:=main
 
-all: onimage coverletter
+all: coverletter
 	$(CC) $(OPTIONS) $(TARGET)
-
-onimage:
-	pdflatex onimage.dtx
 
 coverletter:
 	$(CC) $(OPTIONS) coverletter.tex
