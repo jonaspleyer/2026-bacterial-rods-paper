@@ -1,6 +1,10 @@
-The studies performed by Amir et. al~\cite{Amir2014,Amir2014_2} provided movies of microscopic
+The studies performed by Amir et al.~\cite{Amir2014,Amir2014_2} provided movies of microscopic
 images which showcased 3 states in total:
-An initial state, a bent state and the final relaxed state.
+an initial state at $t=\SI{10}{\second}$, a bent state at $t=\SI{17}{\second}$ and the final
+relaxed state at $t=\SI{34}{\second}$.
+These acquisition times set the durations of the two simulated phases.
+The bending and the subsequent elastic relaxation themselves were not resolved experimentally, so
+no transient information is available for the fit.
 To effectively estimate the positions of the bacterium at these time points, we manually modified
 the provided images by amplifying light shadings of the green cellular envelope.
 This is displayed in Figure~\ref{fig:supplement-amir-progression} (A-C) as the bright green cellular
@@ -12,7 +16,7 @@ Section~\ref{sec:application-1-amir}.
 The system is specified by the estimated parameters and a range of constants which can be obtained
 from the experimental conditions.
 These are listed in Table~\ref{tab:supplement-amir-constants}.
-The number of vertices $N_\text{vertices}$ should be chosen large enough such that the bending of
+The number of vertices $N_v$ should be chosen large enough such that the bending of
 the rod can be properly captured.
 Values which are too small will inadvertently lead to undesired interactions with the confinement
 condition imposed by the narrow tube.\\
@@ -28,7 +32,7 @@ remaining estimated parameter.
     \centering
     \includegraphics[width=\textwidth]{figures/crm_amir/progression.pdf}
     \caption{
-        (A-C) Images by Amir et. al~\cite{Amir2014_2} which have been manually segmented.
+        (A-C) Images by Amir et al.~\cite{Amir2014_2} which have been manually segmented.
         The red line within the mask represents the extracted positions.
         (D-F) Snapshots of the numerical simulation showing the rod in its initial, fully bent and
         fully relaxed state.
@@ -43,7 +47,7 @@ remaining estimated parameter.
         $t_\text{bend}$ & $7$&$\unit{\second}$ & Interval with active flow\\
         $t_\text{relax}$ & $17$&$\unit{\second}$ & Relaxation interval after deactivating flow\\
         $h$ & $10.2$&$\unit{\pixel\per\micro\metre}$ & Conversion factor between pixels and lengths\\
-        $N_\text{vertices}$ & $20$ && Number of vertices use for the discretized rod\\
+        $N_v$ & $20$ && Number of vertices used for the discretized rod\\
         $\Delta x$ & $0.8$&$\unit{\micro\metre}$ & Displacement uncertainty used to calculate the profile-likelihood\\
         $L_\text{y,domain}$ & $59.22$ & $\unit{\micro\metre}$ & Vertical size of the domain
         extending further than the shown images.\\

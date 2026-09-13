@@ -15,7 +15,7 @@ Their particular numerical values are not relevant to the methods proposed in th
 For studies targeting to extract precise numerical
 values a closer inspection and clarification would be required.
 The same parameter estimations can also be achieved by using pixel-based units.
-Such changes leaves the profiles unchanged since both the units of the vertices $\vec{x}_i$ and
+Such changes leave the profiles unchanged since both the units of the vertices $\vec{x}_i$ and
 of the displacement uncertainty $\sigma$ are rescaled (see
 equation~\ref{eq:parameter-estimation-log-likelihood}).
 Furthermore, values of the lineage-aware image-space metric
@@ -37,7 +37,7 @@ These can be found in the \texttt{data} folder of the GitHub repository:
         $T_\text{2}$ & $74.375$&$\unit{\minute}$ & Total time including division events.\\
         & $998-1295$ && Range of frames extracted from movie.\\
         $h$ & $30$&$\unit{\pixel\per\micro\metre}$ & Conversion factor between pixels and lengths\\
-        $N_\text{vertices}$ & $8$ && Number of vertices use for the discretized rod\\
+        $N_v$ & $8$ && Number of vertices used for the discretized rod\\
         $\Delta x$ & $0.15$&$\unit{\micro\metre}$ & Displacement uncertainty used to calculate the
         profile-likelihood\\
         $L_x$ & $25.6$ & $\unit{\micro\metre}$ & Horizontal domain size.\\
@@ -62,7 +62,7 @@ Figure (A) shows that all optimization routines converge, with varying propertie
 The morse-type models achieve a lower (better) cost while both mie-type models remain at higher cost
 values.
 In addition, the reduced models where $\lambda=\SI{1}{\per\minute}$ converge faster.
-These findings further undermine the results presented in
+These findings further corroborate the results presented in
 Subsection~\ref{sec:application-1-without-division}.
 
 \begin{figure}[H]
@@ -90,9 +90,6 @@ However these statements can only be completely justified if we can provide a go
 displacement uncertainty $\sigma$ in pixel space with respect to the  newly defined lineage-aware
 image-space metric.
 This requires further mathematical attention to its definition.
-Furthermore, results from Section~\ref{section:application-2} have shown that growth rates and
-division lengths can be estimated much more accurately when a division event is involved, thus
-providing effectively a lower and upper bound on both values.
 Furthermore, the results from Section~\ref{section:application-2} show that growth rates and
 division lengths can be estimated much more accurately when a division event is involved.
 This effectively provides a lower and upper bound on both values.
@@ -105,7 +102,7 @@ interval after division.
     \caption{
         (A-E) Remaining parameter profiles for the growth rates of the daughter cells.
         This extends Figure~\ref{fig:likelihood-profiles-comparison-with-division}.
-        The profile show that the parameters can be informed by the provided data.
+        The profiles show that the parameters can be informed by the provided data.
         (F) Distribution of estimated growth rates distinguishing between mother (dark blue) and
         daughter (light blue) cells.
     }

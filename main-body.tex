@@ -37,7 +37,7 @@ Bacteria come in various shapes~\cite{Young2006,Young2007}, ranging from simple 
 spirals and helices.
 Rod-shaped bacteria form an important subclass that includes some of the most studied model
 organisms such as \ac{ecoli} or \ac{bsubtilis}.
-Their filamentous structure underlies distinct mechanical~\cite{Daniel2003} and physiological
+Their filamentous structure imposes mechanical~\cite{Daniel2003} and physiological
 constraints~\cite{Jones2001}, thus influencing other cellular aspects such as
 growth~\cite{Chang2014} and division~\cite{Li2007}.
 It also facilitates processes such as swarming~\cite{Harshey1994} or biofilm
@@ -56,18 +56,17 @@ topics~\cite{Ghaffarizadeh2018,Cooper2020,Karolak2021,DeRybel2014}.
 differentiation, transport of extracellular compounds and many other processes which makes them the
 ideal tool to study the individual behavior of cells.
 
-We develop a new agent-based computational model for flexible, rod-shaped bacteria which
-is a mechanical feature that is absent in most \acp{abm}.
+Mechanical flexibility, however, is a feature that is absent in most \acp{abm} for rod-shaped
+bacteria.
 So far, only a few computational studies have considered flexible rods~\cite{Duman2018,Joshi2019},
 but their models cannot be transferred directly to more complex biological systems which might
 involve intracellular reactions, extracellular compounds, growth and division.
 Only a few \acp{abm} support even the less complex cylindrical
-shapes~\cite{Kang2014,Breitwieser2021,Gorochowski2012}, typically modeling cells as rigid
-spherocylinders interacting through steric repulsion~\cite{Winkle2017}.
-While such models can couple mechanical stress to cellular growth~\cite{Winkle2017}, none are able
-to capture the elastic bending of flexible filamentous bacteria, nor do they provide a route to
-quantitative, single-cell parameter estimation from image data.
-This poses a problem in the computational study of these systems.
+shapes~\cite{Rudge2012,Kang2014,Breitwieser2021,Gorochowski2012}, typically modeling cells as rigid
+spherocylinders interacting through steric repulsion~\cite{Rudge2012,Winkle2017}.
+While such models can couple mechanical stress to cellular growth~\cite{Winkle2017}, we are not
+aware of a framework that captures the elastic bending of flexible filamentous bacteria or provides
+a route to quantitative, single-cell parameter estimation from image data.
 Although \acp{abm} appear to be ideal for modeling individual rod-shaped bacteria, this potential
 has yet to be fully realized.
 
@@ -75,12 +74,13 @@ Another major problem is how to estimate parameters for \acp{abm}.
 Classical approaches in systems biology include techniques such as maximum
 likelihood~\cite{Kreutz2013,Raue2014} or maximum a posteriori estimation, identifiability analysis
 and model reduction~\cite{Simpson2025,Gbor2015,Banga2008,Ashyraliyev2009}.
-While some attempts have been made to properly calibrate the \ac{abm} at hand and estimate its
-parameters~\cite{An2016,Lima2021,Dancik2010,Thiele2014} these methods are not widely applied and are
-generally not used to explicitly capture any possible heterogeneity within the cellular population.
+Approaches for analyzing and calibrating \acp{abm} have been proposed~\cite{An2016,Thiele2014},
+and individual models have been fitted to experimental data~\cite{Dancik2010,Lima2021}, but these
+methods are not widely applied and are generally not used to explicitly capture any possible
+heterogeneity within the cellular population.
 
 However, this can leave important questions unanswered:
-which combination of parameters drive the observed phenomena?
+which combination of parameters drives the observed phenomena?
 Can these parameters be identified given a set of datapoints?
 Is there a simpler, i.e., reduced model that can describe the same phenomena?
 If \acp{abm} cannot answer these questions, their results will lack explanatory power and the
@@ -102,33 +102,27 @@ and provide a framework that links mechanistic modeling of rod-shaped bacteria w
 analysis methods (Figure~\ref{fig:flowchart-project-structure}).
 First, we construct a novel mechanical model for flexible, rod-shaped bacteria that captures growth,
 division, elastic deformations of the rod and mechanical interactions between cells.
-Second, we develop computational methods which use segmented microscopic images to
+Second, we develop computational methods that use segmented microscopic images to
 quantitatively compare numerical results with biological data on the single-cell level.
-With these methods we can estimate the parameters of our model in two case studies of increasing
-complexity, each probing different aspects of our model.
 A key feature of this framework is its modularity.
 While most subcomponents (see Figure~\ref{fig:flowchart-project-structure}) rely on the spatial
-representation of bacteria as discretized vertices, others, i.e., the
-% TODO fix this?
-\nameref{subsec:image-space-metric} operate purely on segmentation masks, making them fully
-model-agnostic.
+representation of bacteria as discretized vertices, others, such as the lineage-aware image-space
+metric, operate purely on segmentation masks, making them fully model-agnostic.
 This enables researchers to freely reuse our developed methods across a wide range of models for
 rod-shaped organisms.
 
-Our approach demonstrates that parameter estimation of \acp{abm} is indeed feasible, even in
-the case of complex models such as single-cell modeling of flexible rod-shaped bacteria and when
-incorporating cellular heterogeneity.
-The developed methods fill a methodological gap and present a novel way of fitting individual-based
-models to data which can be readily adapted to various other scenarios.
-Our novel mechanical model for flexible rod-shaped bacteria integrates seamlessly into our previously
-developed agent-based modeling framework \texttt{cellular\_raza}~\cite{Pleyer2025}.
-It is purposefully designed to provide a flexible platform without any particular assumptions on the
-cellular representation or the nature of their processes.
-This allows researchers to adapt the underlying cellular model to their needs, enabling
-further use of the presented approach in future studies.
-Overall, these contributions push for a more rigorous, interpretable, and biologically grounded
-development process for \acp{abm}, which provides deeper mechanistic insights into the nature of
-cellular behaviors.
+Our mechanical model integrates into our previously developed agent-based modeling framework
+\texttt{cellular\_raza}~\cite{Pleyer2025}, which makes no particular assumptions about the cellular
+representation or the nature of the modeled processes and thus lets researchers adapt the underlying
+cellular model to their needs.
+We apply the resulting framework to two case studies of increasing complexity, each probing
+different aspects of the model.
+For a single bent bacterium, we find the full mechanical model to be non-identifiable and use
+profile likelihoods to guide its reduction to an identifiable one.
+For a growing colony, we recover growth rates and division lengths of individual cells and their
+descendants from routine time-lapse microscopy.
+Parameter estimation for \acp{abm} is thus feasible even when the model resolves individual,
+flexible rod-shaped cells and accounts for cellular heterogeneity.
 %###################################################################################################
 % \section{Overview}
 % This work consists of many subcomponents which can be combined to achieve various tasks.
@@ -185,8 +179,8 @@ cellular behaviors.
         or used to guide modeling choices.
         The parameter estimation module integrates the preceding ones and allows us to calibrate the
         model which can then be used in generating synthetic data (top right).
-        Colors indicate the component type; core scientific drivers (red), auxiliary methods (yellow)
-        and extensions (blue).
+        Colors indicate the component type; core scientific drivers (orange) and auxiliary
+        methods (yellow).
     }
     \label{fig:flowchart-project-structure}
 \end{figure}
@@ -283,7 +277,7 @@ to define the dynamics of the vertices $\{\vec{x}_i\}$.
         polygon of the lower agent.
         Interaction partners of vertex $\vec{x}_3$ are highlighted.
         (C) Potential curves of the Mie potential for various combinations of exponents $n,m$ with
-        upper bound $\beta=2.5\,U_0$ and cutoff $\zeta=3.5\,(R_1+R_2)$ (red line).
+        upper bound $\beta=2.5\,V_0$ and cutoff $\zeta=3.5\,(R_1+R_2)$ (red line).
         (D) Potential curves of the Morse potential with various stiffnesses $\omega$ and cutoff
         $\zeta=3.5\,(R_1+R_2)$ (red line).
     }
@@ -306,7 +300,6 @@ Our work focuses on smaller time scales where no plastic deformations are involv
 elastic forces dominate.
 
 We model the bacterium as a bending beam and
-% TODO thesis talk about this
 % In principle, this stress will be dependent on the position inside the cell~\cite{Chatterjee1988},
 % but for sake of simplicity we chose to model the bacterium as a bending beam.
 discretize the bacteria into vertices $\vec{x}_i$, connected by elastic springs of length $l$.
@@ -321,7 +314,7 @@ vertices is given by:
         -\gamma\left(1 - \frac{l}{\left|\vec{w}_i\right|}\right) \vec{w}_i
         + \gamma\left(1 - \frac{l}{\left|\vec{w}_{i+1}\right|}\right) \vec{w}_{i+1}.
 \end{equation}
-The spring constants $\gamma$ determines the elasticity with respect to elongation of the cell.
+The spring constant $\gamma$ determines the elasticity with respect to elongation of the cell.
 
 In addition to the forces resulting from the elongation of the bacterial rod, we must also consider
 the bending forces.
@@ -334,7 +327,7 @@ The bending force acting on vertex $\vec{x}_i$ is given by:
     \vec{F}_{i,\text{curvature}} = \eta\kappa_i
         \frac{\vec{w}_i - \vec{w}_{i+1}}{|\vec{w}_i-\vec{w}_{i+1}|},
 \end{equation}
-where $\eta_i$ is the rigidity at vertex $\vec{x}_i$ (see Figure~\ref{fig:model-bacterium}).
+where $\eta$ is the rigidity of the rod (see Figure~\ref{fig:model-bacterium}).
 The adjoining vertices $\vec{x}_{i-1},\vec{x}_{i+1}$ are subject to half of the same force in the
 opposite direction $\vec{F}_{i\pm 1,\text{curvature}} = -0.5\,\vec{F}_{i,\text{curvature}}$.
 We can see that the curvature force does not move the overall center of the rod in space.
@@ -383,13 +376,13 @@ Lennard-Jones~\cite{Jones1924} potential and was designed to describe the intera
 molecules.
 It is given by:
 \begin{align}
-    V(r) &= V_0C\left[ \left(\frac{\sigma}{r}\right)^n -
-        \left(\frac{\sigma}{r}\right)^m\right]\\
-    C &= \frac{n}{n-m}\left(\frac{n}{m}\right)^{\frac{n}{n-m}}
+    V(r) &= V_0\,c_{nm}\left[ \left(\frac{r_0}{r}\right)^n -
+        \left(\frac{r_0}{r}\right)^m\right]\\
+    c_{nm} &= \frac{n}{n-m}\left(\frac{n}{m}\right)^{\frac{n}{n-m}}
 \end{align}
-The minimum of the potential is given by $-V_0$ and the thickness of our rods is encoded in
-$\sigma = (m/n)^{1/(n-m)}(R_1+R_2)$ where $R_1,R_2$ are the radii of the two interacting rod-like
-bacteria.
+The minimum of the potential is given by $-V_0$ and the thickness of our rods is encoded in the
+characteristic distance $r_0 = (m/n)^{1/(n-m)}(R_1+R_2)$, where $R_1,R_2$ are the radii of the two
+interacting rod-like bacteria.
 We introduced the shorthand notation $r=|\vec{x}_i - \vec{p}|$ for the distance between the two
 points in question.
 
@@ -427,7 +420,7 @@ The potential is of the form
 and has 3 parameters.
 The overall potential strength $V_0$, the sum of the radii of the particles $R_1+R_2$ and the
 potential stiffness $\omega$ which controls the rate of change as one travels along the radial axis.
-We also assign a spatial cutoff $\xi$ to the range of the interaction potential.
+We also assign a spatial cutoff $\zeta$ to the range of the interaction potential.
 Figure~\ref{fig:model-bacterium} (D) shows various configurations of a Morse potential.
 
 % --------------------------------------------------------------------------------------------------
@@ -445,9 +438,9 @@ At this point, two new cells are constructed in place of the mother cell.
 We first calculate the new spring lengths of the two resulting rods using the properties of the
 mother cell:
 \begin{equation}
-    \tilde{l} = l\left(\frac{1}{2} - \frac{R}{n_v l}\right)
+    \tilde{l} = l\left(\frac{1}{2} - \frac{R}{N_v l}\right)
 \end{equation}
-where $n_v$ is the number of vertices and $R$ the previously introduced thickness of the rod.
+where $N_v$ is the number of vertices and $R$ the previously introduced thickness of the rod.
 This relation ensures that that the tips of the two new rods are touching right after the division
 event.
 We subdivide the polygon given by the vertices of the mother cell in $2n+1$ segments consisting of
@@ -456,7 +449,7 @@ $\tilde{l}$.
 The first and latter groups determine the new vertices of the two daughter cells while the segment
 between them acts as spacing.
 This approach assumes that the total length of the polygon is greater than its diameter,
-i.e., $n_vl>2R$.
+i.e., $N_v\,l>2R$.
 We set the individual growth rates of the daughter cells explicitly during the division event.
 All other intracellular parameters are passed from the mother cell to its daughter cells.
 Table~\ref{table:list-of-parameters} shows a list of all parameters used within our model.
@@ -506,9 +499,7 @@ exploratory capabilities of researchers.
 methods from other popular software libraries, such as \texttt{NumPy} and \texttt{SciPy}.
 Furthermore, it is able to natively track mother-daughter relations of cells
 over the course of a numerical simulation which is an integral component of our image-space metric
-comparison algorithm (see \nameref{subsec:image-space-metric}).
-% TODO remove this ref
-More details can be found in the supplement (see \nameref{section:supplement-performance})
+comparison algorithm (see Subsection~\ref{subsec:image-space-metric}).
 
 %###################################################################################################
 \section{Methodology}
@@ -543,7 +534,7 @@ VTK library~\cite{vtkBook,Sullivan2019}.
 The first stage of the visualization process involves generating three-dimensional surface meshes
 for each bacterium (see Figure~\ref{fig:progression-image-generation} (A)).
 We insert spheres matching the thickness of the rod $R$ at each vertex $\vec{x}_i$ and connect
-adjacent vertices $\vec{x}_i,\vec{x}_{i+1}$ with a cylinder, of radius $r$ which is positioned
+adjacent vertices $\vec{x}_i,\vec{x}_{i+1}$ with a cylinder of radius $R$ that is positioned
 such that its core is identical to the connecting line segment between the two vertices.
 Finally, we combine the meshes of all of these objects and extract their combined surface which will
 be used for visualization of a single bacterium.
@@ -686,7 +677,7 @@ scenarios.
 These observations provide us with enough information to construct an error model for the extraction
 algorithm.
 Further details such as information about the covariances are given in the supplementary materials
-(see \nameref{sec:supplement-extraction-algorithm}).
+(see Supporting Information, \nameref{sec:supplement-extraction-algorithm}).
 
 \begin{figure}[H]
     \centering
@@ -979,8 +970,8 @@ Subsection~\ref{subsec:image-space-metric}) to a time series containing such eve
 \label{sec:application-1-amir}
 To demonstrate that our model can be applied to single cells and to showcase the usefulness
 of the comparison techniques that we have previously developed, we apply our computational
-model directly to the data provided by Amir et al.'s experiments~\cite{Amir2014,Amir2014_2} (see
-Section~\ref{sec:supplement-amir-details}).
+model directly to the data provided by Amir et al.'s experiments~\cite{Amir2014,Amir2014_2}
+(see Supporting Information, \nameref{sec:supplement-amir-details}).
 The experimental setup is displayed in Figure~\ref{fig:amir-bending-simulation} (A).
 The study examined how a single \ac{ecoli} bacterium, partially confined within a narrow tube,
 reacts to horizontal fluid flow exerting a force on the bacterium.
@@ -1002,20 +993,20 @@ at $y_i=0.5(\vec{x}_i+\vec{x}_{i+1})_y$.
 We therefore model the force exerted by the fluid flow onto the individual vertices by
 \begin{align}
     \vec{G}_i &= C
-    \underbrace{|\vec{x}_i - \vec{x}_{i+1}|\sin(\beta_i)}_\text{proj. rod segment length}
+    \underbrace{|\vec{x}_i - \vec{x}_{i+1}|\sin(\varphi_i)}_\text{proj. rod segment length}
     \underbrace{(y_iy_\text{max} - y_i^2)}_\text{flow contribution}\vec{e}_x\\
     \vec{F}_{i,\text{external}} &= \frac{1}{2}(\vec{G}_{i-1}+\vec{G}_i)
 \end{align}
 which is proportional to the length of the rod segment projected along the y-axis.
 Similarly to Stokes' Law~\cite{Stokes1856}, it acts along the axis of the fluid flow (x-axis).
-Here $\beta_i$ is the angle of the rod edge between $\vec{x}_{i+1}-\vec{x}_i$ and the x-axis.
+Here $\varphi_i$ is the angle between the rod edge $\vec{x}_{i+1}-\vec{x}_i$ and the x-axis.
 In addition we confine vertices who belong to segments that are within the tube
 via $(\vec{x}_{i+1})_x=x_0$ and fix the value for the first vertex
 $\vec{x}_0$ such that the bacterium is attached to the bottom.
 
 We extract the positions of the rod from the data images (see
 Figure~\ref{fig:amir-bending-simulation} (A)) and compare them with the simulated positions using
-the direct comparison algorithm (see SubSection~\ref{subsec:direct-metric}).
+the direct comparison algorithm (see Subsection~\ref{subsec:direct-metric}).
 Our simulation comprises two phases.
 The first phase involves an external flow force that initially bends the rod and lasts
 $\SI{7}{\second}$.
@@ -1026,14 +1017,15 @@ over a span of $\SI{17}{\second}$.
 Since this setup is void of any cell-cell interactions or cell division, the dynamics of the cell
 can be described by a combination of growth and physical mechanics (see
 Subsection~\ref{subsection:mechanical-model-mechanics}).
-We are thus left with 5 parameters: magnitude of the drag force $C$, growth rate $\alpha$, rigidity
-of the rod $\eta$, spring tension $\gamma$ and damping constant $\lambda$ (see
-Table~\ref{table:list-of-parameters}).
+We are thus left with 5 parameters: growth rate $\mu$, rigidity of the rod $\eta$, spring tension
+$\gamma$ and damping constant $\lambda$ (see Table~\ref{table:list-of-parameters}), together with
+the magnitude $C$ of the drag force introduced above.
 Figure~\ref{fig:amir-bending-simulation} (D) shows a snapshot of the initial (upright, light blue)
 and intermediate (bent, dark blue) position of the rod using the optimized parameters.
 
 The corresponding likelihood profiles are displayed in Figure~\ref{fig:amir-bending-simulation}
-(D-H, bright blue curves). It can be seen that the optimized parameters are at the minimum of the
+(E-I, bright blue curves).
+It can be seen that the optimized parameters are at the minimum of the
 \textit{profile-likelihood}.
 However, \textit{profile-likelihoods} shown in Figure~\ref{fig:amir-bending-simulation} (E-I) are
 multimodal, e.g., the corresponding parameters are not unique.
@@ -1043,29 +1035,33 @@ This can be exploited by removing the damping to reduce the model.
 The resulting curves (dark blue) still exhibit multimodality, but a further reduction of the model
 by fixing the spring tension $\gamma$ produces a fully identifiable system (orange curves).
 
-It should be noted that the images used only contain snapshots of a fully bent or fully relaxed rod,
-with no intermediate steps shown.
-This effectively limits us to two data points and is likely the key factor that leads to the
-non-identifiability of the damping constant, $\lambda$, which could be removed by additional
-transient information.
+It should be noted that the available images only contain snapshots of a fully bent or a fully
+relaxed rod, with no intermediate steps in between.
+The data therefore constrain the damping constant $\lambda$ only through the durations of the two
+phases and not through the transient itself.
+This is reflected in the shape of the corresponding profile in
+Figure~\ref{fig:amir-bending-simulation} (I), which is flat towards zero but rises steeply for
+larger values.
+The damping constant is therefore practically non-identifiable from below while being bounded from
+above; resolving it from below would require time-resolved information on the elastic relaxation,
+which is not available for this experiment.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figures/crm_amir/profiles.pdf}
     \caption{
-        (A-C) Manually segmented experimental snapshots of by Amir et al.~\cite{Amir2014_2}.
-        The red line within the green mask shows the extracted position.
         (A-C) Snapshots of bending experiment by Amir et al.~\cite{Amir2014_2} with overlayed
         manual segmentation mask (bright green) and extracted position (red).
         The sequence shows the rod initially (A), under flow (B) and after relaxation (C).
         (D) Comparison of simulated and experimental rod in bent and relaxed state.
-        (D-H) \textit{Profile-likelihoods} for the estimated parameters.
+        (E-I) Profile-likelihoods for the estimated parameters.
         Bands of blue and yellow indicate confidence intervals of $68\%,90\%$ and $95\%$.
         Bright blue curves represent the full model, dark blue a reduced model without damping
         $\lambda=0$ and orange curves when fixing the spring tension parameter
-        $\gamma=\gamma_\text{opt}$ where $\gamma_\text{opt}$ is obtained from the second (higher)
-        minimum of the spring tension profile (H).
-        With these reductions, every parameter is identifiable.
+        $\gamma=\gamma_\text{opt}$, where $\gamma_\text{opt}$ is the second (higher) minimum of the
+        spring tension profile (H) of the reduced model with $\lambda=0$.
+        With these reductions, every parameter is identifiable; note that the confidence intervals
+        of the reduced models are conditional on the parameters held fixed.
     }
     \label{fig:amir-bending-simulation}
 \end{figure}
@@ -1082,7 +1078,8 @@ Our dataset~\cite{Trude1982} consists of a time-series of phase-contrast images 
 Figure~\ref{fig:application-2-data-overview} (A)).
 We segmented them using the omnipose toolkit~\cite{Cutler2022} (see
 Figure~\ref{fig:application-2-data-overview} (B)) and extracted their trajectories with the
-previously described pipeline (Section~\ref{sec:supplement-extraction-algorithm}).
+previously described pipeline (Supporting Information,
+\nameref{sec:supplement-extraction-algorithm}).
 The model is initialized with the extracted position of the first snapshot and parameters are
 optimized to minimize the respective metrics.
 
@@ -1108,7 +1105,7 @@ Section~\ref{subsec:image-space-metric}).
         (B) Segmentation result of (A).
         (C) Initial (left), intermediate (middle) and final (right) microscopic snapshots.
         A complete list of snapshots is included in the supplementary material (see
-        \nameref{sec:supplement-data-details}).
+        Supporting Information, \nameref{sec:supplement-data-details}).
         (D) Analysis of growth for the chosen time interval.
         (E) The histogram of the growth parameters exhibits significant cell-cell variability.
         % The obtained results are further discussed in the supplementary material
@@ -1143,7 +1140,7 @@ growth parameters.
 \label{sec:application-1-without-division}
 First, we restrict our analysis to a time interval of $\SI{20}{\minute}$ without any cell division
 events, which enables us to use the computationally more efficient direct position-space metric
-(Section~\ref{subsec:image-space-metric}).
+(Subsection~\ref{subsec:direct-metric}).
 Using our complete mechanical model (see Section~\ref{sec:computational-model}), we optimized a
 total of $11$ parameters: $5$ global parameters that govern mechanics and interactions (damping
 $\lambda$, radius $R$, and parameters $n,m,V_0$ of the Mie potential) together with $6$
@@ -1169,8 +1166,8 @@ to the provided data.
 However, to systematically analyze these differences and investigate if the obtained
 parameters could be identified, we employed the \textit{profile-likelihood} method.
 
-Figure~\ref{fig:parameter-estimates-single-step} shows the \textit{profile-likelihoods} for each
-optimized parameter.
+Figure~\ref{fig:parameter-estimates-single-step} shows the profile-likelihoods for each optimized
+parameter.
 In total, we compare four distinct models, covering both Morse and Mie-type interactions with and
 without a fixed damping constant $\lambda=\SI{1}{\per\minute}$.
 Figure~\ref{fig:parameter-estimates-single-step} (A) displays the \textit{profile-likelihood} for
@@ -1185,12 +1182,11 @@ Therefore, we assign a fixed value for this parameter.
 The parameters which characterize the Morse-type interaction are the potential stiffness $\omega$,
 strength $V_0$ and radius $R$, Figure~\ref{fig:parameter-estimates-single-step} (B, E, F).
 While the potential stiffness (B) and radius (F) can be accurately estimated from the given data,
-the potential strength (E) is subject to a practical unidentifiability~\cite{Raue2009} which is
+the potential strength (E) is subject to a practical non-identifiability~\cite{Raue2009} which is
 resolved by fixing the damping constant to $\lambda=\SI{1}{\per\minute}$.
 The Mie potential uses two parameters $n,m$ (C,D) to determine the shape of the interaction
 potential which allows it to describe a larger class of curves.
-However, as the \textit{profile-likelihoods} presented in
-Figure~\ref{fig:parameter-estimates-single-step}
+However, as the profile-likelihoods presented in Figure~\ref{fig:parameter-estimates-single-step}
 (A,C,D,E) show, that the exponents $n,m$ of the Mie-type interaction can not be estimated, even when
 reducing the model via $\lambda=\SI{1}{\per\minute}$.
 It is necessary to enhance the data set, e.g., by including additional scenes showcasing a greater
@@ -1314,14 +1310,15 @@ above.
 The potential stiffness is particularly influenced by contributions from overlaps, which is well
 explicable since higher parameter values result in a steeper potential curve, thus being less
 permissible to overlapping radii.
-Figure~\ref{fig:supplement-profiles-with-division} (D-I) displays the growth rates of the mother
-cells while (J-M) are the division lengths, corresponding to cells (D-G).
+Figure~\ref{fig:likelihood-profiles-comparison-with-division} (D-G) displays the growth rates of
+the mother cells and (H,I) those of the two cells that do not divide, while (J-M) are the division
+lengths of the mother cells (D-G).
 The profiles of growth rates of the mother cells (D-G) which lead to a division event, exhibit a
 stark negative peak which indicates good identifiability of these parameters.
 In contrast, the profiles of growth rates (H,I) which belong to cells that do not divide during the
 time interval are less pronounced.
-The division lengths of the mother cells (D-G) also show a clear negative dip, thus enabling a
-proper estimation of this parameter.
+The division lengths (J-M) also show a clear negative dip, thus enabling a proper estimation of
+this parameter.
 All growth rates for the daughter cells (N-P) (and (A-E) of
 Figure~\ref{fig:supplement-profiles-with-division}) show similar behavior to the
 non-dividing cells which are present at the initial state.
@@ -1358,7 +1355,7 @@ been possible by other approaches such as purely statistical models.
     \includegraphics[width=\textwidth]{figures/crm_divide/profiles-1.pdf}
     \caption{
         Profiles of optimized cost functions when scanning along one parameter axis.
-        (A) Potential Stiffness (B) Strength (C) Radius of the Morse Potential.
+        (A) Radius, (B) strength and (C) potential stiffness of the Morse potential.
         (D-G) Growth rates of mother cells and (H,I) non-dividing cells.
         (J-M) Division lengths of the mother cells.
         (N-P) Growth rates of daughter cells.
@@ -1457,7 +1454,7 @@ This could also explain the lower radius value compared to the other results.
             & \makecell{Damping\\$[\lambda]=\unit{\per\minute}$}
             & \makecell{Exponents $n,m$/\\Stiffness $[\omega]=\unit{\per\micro\metre}$}
             & \makecell{Strength\\$[V_0]=\unit{\micro\metre^2\per\minute^2}$}
-            & \makecell{Radius\\$[r]=\unit{\micro\metre}$}\\
+            & \makecell{Radius\\$[R]=\unit{\micro\metre}$}\\
         \midrule
         Mie                         & 3.670 & 2.358, 2.408 & 0.0081 & 0.239\\
         Mie $\lambda=\lambda_0$     & -     & 2.189, 2.236 & 0.0024 & 0.239\\
@@ -1477,7 +1474,6 @@ This could also explain the lower radius value compared to the other results.
     \label{tab:comparison-kinetic-parameters}
 \end{table}
 
-% \textbf{TODO decide if we mention these}
 % \begin{itemize}
 %     \item plastic/elastic deformations
 %     \item non-uniform thickness of the rod
@@ -1490,161 +1486,102 @@ This could also explain the lower radius value compared to the other results.
 
 %###################################################################################################
 \section{Discussion}
-We demonstrated that it is possible to estimate the parameters of \acp{abm} on a single-cell level.
-We also showed that unidentifiabilities can be detected and effectively reduced by classical
-model reduction techniques.
-We note, however, that a full identifiability analysis with confidence intervals was only carried
-out for the direct position-space metric; for the lineage-aware image-space metric a corresponding
-likelihood formulation remains to be established, so that the associated parameter estimates should
-be interpreted more cautiously.
-Together with the flexible nature of \texttt{cellular\_raza} \cite{Pleyer2025}, this opens up the
-possibility to design minimal \acp{abm} which can be fit to experimental data.
-The individual treatment of the cells allows us in principle to estimate the distribution of the
-parameters directly without having to resort to any assumptions on the form of said distribution.
-This is true for any parameter, not just the growth rates, since our approach can be generalized to
-other cellular properties.
+It has been demonstrated that the parameters of an \ac{ib} model of flexible rod-shaped bacteria can
+be estimated on the single-cell level from segmented microscopic image time series.
+Profile likelihoods are indicative of the parameters that are actually constrained by the data.
+In the case of the bending experiment of a single bacterium, the full mechanical model is not
+identifiable; however, classical model reduction renders it identifiable.
+Conversely, for a growing colony, the growth rates and division lengths of individual cells and
+their descendants are recovered from routine time-lapse microscopy.
+Therefore, cell-to-cell differences can be accessed without the necessity of assuming a functional
+form for their distribution.
+It has been demonstrated that, under certain conditions, this is applicable to any individual
+parameter of the model, and not exclusively to the growth rates.
+The requisite condition for this to be the case is a sufficient number of cells.
 
-Future developments of these methods should focus on multiple aspects that target challenges with
-respect to computational efficiency, accuracy and extensions of the described model.
-Additional biological effects include polar interactions~\cite{Duvernoy2018},
-differentiation~\cite{vanGestel2015}, extracellular reactions~\cite{Li2025}.
-One significant area of improvement is the position extraction algorithm which works well for cells
-in 2D or thin sheets but fails when multiple bacteria overlap.
-In addition, the algorithm in its current state most often underestimates the length of the rods,
-leading to skewed results.
-This task is well suited to be tackled by a purpose-built machine-learning tool that can either
-reconstruct masks or accurately extrapolate positions from incomplete (possibly overlapping) masks.
-Within the presented framework, the parent penalty takes immediate effect surrounding the division
-event but also persists indefinitely.
-This simplification should be lifted and the parent penalty should depend on the time
-difference between the division event and the current time point at which the comparison takes
-place.
-This would introduce a time-dependent variable $p=p(t)$ which grows with the age of the daughter cells.
-It would allow for a much smoother transition from the pre-divided to the fully-divided system.
+The significance of this framework is twofold.
+From a methodological perspective, the comparison is intentionally agnostic to the underlying
+cellular representation.
+The image-space metric operates exclusively on segmentation masks and is therefore expected to be
+applicable to any model—whether flexible or rigid, vertex-, spherocylinder-, or level-set-based—that
+is capable of rendering labeled cell masks.
+The presented methods have the potential to be reused across a wide range of rod-shaped organisms
+and modeling paradigms without modification, which is a prerequisite for adoption by a broad
+community.
+From a biological standpoint, the estimation of parameters on a per-cell basis effectively converts
+mechanical and kinetic model parameters into quantifiable values.
+Rather than making assumptions about population averages, growth rates, division lengths, and
+interaction strengths can be directly measured for individual cells and their lineages through the
+use of routine time-lapse microscopy.
+This methodology establishes a framework for quantifying cell-to-cell variability and its underlying
+mechanical origins.
+In doing so, it produces per-cell readouts that are not attainable through population-level
+descriptions due to their inherent limitations.
 
-To speed up the optimization process, it could also be valuable to initially consider all
-parameters as global ones and once a certain threshold of tolerance is matched, loosening this
-restriction and treating cells individually.
-This would allow the algorithm to initially search within a smaller space and possibly reach the
-optimum more quickly in total.
-Another factor that could be considered to improve performance is that individual parameters of
-cells which are spatially separated would not have an immediate effect on each other, thus presenting
-a loosely coupled or fully decoupled relationship.
-Depending on the optimization routine, this information could be exploited.
-Ultimately, we aim to apply these methods to larger amounts of data, which is done most
-effectively by fitting our model to various time-series simultaneously which is yet to be
-implemented.
+Our approach differs from previous work on the calibration of \acp{abm}.
+Where such models have been fitted to data, the comparison has been made at the level of population
+summaries: Dancik et al.~\cite{Dancik2010} calibrate an agent-based model of \textit{Leishmania
+major} infection against published macrophage and parasite counts, Lima et al.~\cite{Lima2021}
+calibrate a coarse-grained two-scale tumor model against the confluence of live and dead cells
+measured every three hours, and the recipes compiled by Thiele et al.~\cite{Thiele2014} fit
+behavioral probabilities of an individual-based model to aggregate abundance patterns.
+In each case the individual agents are simulated, but the data enter as aggregates, and the
+estimated parameters characterize the population rather than its members.
+In contrast, the metrics developed here operate at the level of individual cells and their lineages.
+Consequently, these metrics enable the assignment of parameters to individual cells rather than to a
+population average.
+Furthermore, we do not merely rely on a point estimate; the profile likelihoods inform us of the
+parameters that are constrained by the data.
+In instances where these parameters are not constrained, the profile likelihoods suggest methods
+through which the model can be reduced.
+In comparison with mechanical models of rod-shaped bacteria that treat cells as rigid
+spherocylinders~\cite{Rudge2012,Winkle2017}, our formulation accounts for elastic bending.
+This capability is essential for the analysis of deformation experiments, such as those conducted by
+Amir et al.~\cite{Amir2014,Amir2014_2}.
 
-By choosing \texttt{cellular\_raza} \cite{Pleyer2025} as a modeling framework, we retain flexibility
-with respect to model design thus effectively allowing us to reduce or extend our model as
-development progresses since \texttt{cellular\_raza} allows us to change the underlying
-representation of the cells.
-This facilitates model development if unidentifiabilities are encountered which are determined to be
-of structural (model-based) rather than practical nature (due to lack of data) \cite{Heinrich2025}.
-This allows us to iterate and find the model formulation which suits the data best while still
-retaining our mechanistic understanding of the problem at hand.
+Several limitations should be kept in mind.
+First, our benchmark of the extraction algorithm uses synthetic masks generated with the same model
+that is later fitted.
+Thus, it quantifies the internal consistency of the pipeline rather than its accuracy against an
+independent ground truth.
+Second, the two case studies are based on small datasets, three snapshots of a single bacterium and
+a time series of six cells, which are sufficient to demonstrate an identifiability analysis but not
+to characterize the distribution of a parameter across a population.
+Third, confidence intervals were derived only for the direct position-space metric.
+For the lineage-aware image-space metric, a corresponding likelihood formulation has yet to be
+established.
+The cost profiles reported should not be interpreted as likelihood-based confidence regions.
+Finally, the estimated mechanical parameters are effective quantities of a mass-rescaled description
+and are not directly comparable to independently measured material constants of the cell envelope.
 
-% \begin{itemize}
-%     \item Summary:
-%         "blueprint" to estimate parameters of \ac{abm},
-%         bending of bacteria,
-%         individual nature of cells,
-%         fit model to data,
-%         without+with division
-%
-%     \item Model does not capture every aspect of rod-shaped bacteria. Needs to extended (see our
-%         review).
-%     \begin{enumerate}
-%         \item polar interactions
-%         \item differentiation for van Gogh bundles; surfactin-producing, matrix-producing cells.
-%         \item Proper friction; this might have a huge implication on the estimation of
-%             parameters~\cite{Grant2014}.
-%             This paper has already implemented this~\cite{Doumic2020}.
-%             We can build on top of that.
-%         \item Extracellular Reactions~\cite{Li2025}
-%         \item see supplement for full list \ref{table:simulation-aspects-supplement}
-%     \end{enumerate}
-%     \item Data Extraction: Skeletonization Algorithm ultimately not good enough for some scenarios
-%         (i.e. overlapping of cells, endpoints can sometimes be "too short")
-%     \begin{itemize}
-%         \item Possibly use AI for new algorithm
-%     \end{itemize}
-%     \item Image generation; Produce high-quality near-realistic microscopic images with cell-masks
-%         from scratch with mechanistic model; train cell-segmentation and more importantly
-%         cell-tracking algorithms with that.
-%     \item Lack of data -> this study establishes only methods -> apply it much more broadly in
-%         future
-% \end{itemize}
-%
-% \textbf{Discussion Identifiability and Model Reduction/Flexibility}\\
-%
-% \textbf{Discussion Advanced Optimizations}\\
-% \begin{itemize}
-%     \item 
-% \end{itemize}
+Several extensions suggest themselves.
+The position extraction algorithm works well for 2D cells or thin sheets, but it fails when multiple
+bacteria overlap.
+In its current state, the algorithm tends to underestimate the length of the rods, which leads to
+skewed results.
+A purpose-built machine-learning tool that can reconstruct masks or accurately extrapolate positions
+from incomplete, possibly overlapping masks is well suited to tackle this task.
+Currently, the parent penalty takes immediate effect at the division event and then persists
+indefinitely.
+Making the penalty a time-dependent quantity, $p = p(t)$, that grows with the age of the daughter
+cells would allow for a much smoother transition from the pre-divided to the fully divided system.
+Further biological effects, such as polar interactions~\cite{Duvernoy2018},
+differentiation~\cite{vanGestel2015}, and extracellular reactions~\cite{Li2025}, can be incorporated
+within the same framework.
+The presented pipelines can also be used in reverse to generate near-realistic microscopic images
+together with matching ground-truth masks.
+These masks are needed in large numbers to train segmentation and, more importantly, cell-tracking
+algorithms.
+Finally, scaling the approach to larger amounts of data, most effectively by fitting several time
+series simultaneously, which has yet to be implemented, would turn per-cell estimates into estimated
+parameter distributions.
 
-\section{Conclusion}
-In this work we have laid out how to estimate the parameters of \acp{abm} for rod-shaped bacteria
-on the single-cell level from microscopic image time series.
-We introduced an \ac{ib} computational model that captures the elastic bending, growth, division
-and mechanical interactions of flexible rods and is implemented within
-\texttt{cellular\_raza}~\cite{Pleyer2025}, making it flexible in design and readily reusable.
-To connect such models to experimental data, we devised methods that extract spatial positions and
-further cellular information from segmented microscopic images, which are validated against our own model, 
-together with a visualization pipeline that renders simulation snapshots and generates cell masks.
-Building on these imaging techniques, we constructed a lineage-aware cost function that compares
-cellular configurations across division events and thereby enables parameter estimation in
-scenarios that were previously inaccessible.
-Combining these advances, we applied \textit{profile-likelihood}-based parameter estimation to case
-studies of increasing complexity and showed that the involved parameters can be identified, that
-unidentifiabilities can be detected and removed by classical model reduction, and that individual
-cell-to-cell differences can be recovered.
-
-The significance of this framework lies in two directions.
-Methodologically, the comparison is deliberately agnostic to the underlying cellular representation:
-the image-space metric operates purely on segmentation masks and therefore applies to any model, e.g., 
-flexible or rigid, vertex-, spherocylinder- or level-set-based that can render labeled cell
-masks. The presented methods can thus be reused across a wide range of rod-shaped organisms and
-modeling paradigms without modification, a prerequisite for adoption by a broad community.
-Biologically, estimating parameters on a per-cell basis turns mechanical and kinetic model
-parameters into measurable quantities: rather than assuming population averages, growth rates,
-division lengths and interaction strengths can be read out for individual cells and their lineages
-directly from routine time-lapse microscopy. This provides a route to quantify cell-to-cell
-variability and its mechanical origins and yields testable, mechanistic readouts that purely
-statistical or population-level descriptions cannot deliver.
-To our knowledge, this is among the first demonstrations that single-cell parameter estimation,
-including identifiability analysis, is feasible for a mechanistic individual-based model of flexible
-rod-shaped bacteria.
-
-The code is publicly available as the Python package
-\href{https://github.com/jonaspleyer/cr_mech_coli}{cr\_mech\_coli}, and the underlying cellular
-properties are provided within \texttt{cellular\_raza}~\cite{Pleyer2025}, which lets researchers
-employ well-known methods such as \textit{profile-likelihood} and sensitivity analysis and reuse,
-extend and combine existing building blocks to incorporate additional biological properties.
-
-Future work will explore the data-generation capabilities of the software in more detail; ongoing
-progress already harnesses our model and imaging pipelines to construct near-realistic microscopic
-images together with corresponding cell masks, which can be used to train segmentation and, more
-importantly, cell-tracking algorithms that require large amounts of data.
-On the biological side, many cellular properties remain to be investigated with this technique, and
-a central open question is how to scale the approach to large numbers of cells so that the
-distributions of the parameters themselves can be estimated.
-Taken together, this work establishes a promising platform that directly combines microscopic data
-with single-cell agent-based modeling and opens a wide range of opportunities for future
-quantitative studies in cellular biology.
-
-% \begin{itemize}
-%     \item Highlight methodological advancements
-%     \item Constructed Model which already combines many effects; possibility to extend this even further
-%     \item can now use classical methods: sensitivity-analysis, likelihood estimators and uncertainty quantification
-%     \item Proof of concept: Able to fit individual parameters of the agents; can be extend this?
-%     \item Provide software package which combines all functionality and is readily available
-%     \item Future work:
-%     \begin{itemize}
-%         \item Optimize multiple data sources (images) in parallel: requires some kind of
-%         "normalization" to ensure that the dimensions, pixels etc. are the same such that parameters
-%         are comparable; also requires identical experimental setup
-%         \item Compare different species with various modifications
-%         \item Modify model futher; asymmetric forces etc.
-%     \end{itemize}
-% \end{itemize}
+By choosing \texttt{cellular\_raza}~\cite{Pleyer2025} as the modeling framework, we retain
+flexibility with respect to model design, since the underlying representation of the cells can be
+changed as development progresses.
+This is important when non-identifiability is structural, or model-based, rather than practical, or
+caused by a lack of data~\cite{Heinrich2025}, because the model itself must be reformulated instead
+of the dataset extended.
+Overall, this work combines microscopic data directly with single-cell agent-based modeling and
+establishes the foundation for treating the parameters of these models as measurable, cell-resolved
+quantities.
