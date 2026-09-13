@@ -29,11 +29,16 @@ clean: clean_partial
 
 fresh: clean all
 
-zip: fresh
+combined:
+	python helper.py combine
+	$(CC) $(OPTIONS) $(TARGET)-combined
+
+zip:
+	$(MAKE) clean
+	$(MAKE) combined
 	$(MAKE) clean_partial
-	zip archive.zip *.sty
-	zip archive.zip *.dtx
-	zip archive.zip *.tex
-	zip archive.zip *.pdf
-	zip archive.zip -r figures/
+	zip archive.zip $(TARGET)-combined.tex
+	zip archive.zip plos2025.bst
+	zip archive.zip $(TARGET)-combined.pdf
 	zip archive.zip references.bib
+	python helper.py zip_graphics
